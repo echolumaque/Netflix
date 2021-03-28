@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Visual="Material"
+             BackgroundColor="Black"
+             xmlns:images="clr-namespace:Netflix.Helpers.Images"
+             xmlns:fonts="clr-namespace:NoonGil.Helpers.Fonts"
+             x:Class="Netflix.Views.LoginPage">
+
+    <Grid RowDefinitions="Auto,Auto,Auto"
+          ColumnDefinitions="*,*">
+
+        <StackLayout Grid.Row="0"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="2">
+
+            <ffimage:CachedImage Source="{images:ImageResource Netflix.Helpers.Images.netflix.png}"
+                                 DownsampleToViewSize="True"
+                                 HeightRequest="100"
+                                 Margin="10"
+                                 HorizontalOptions="StartAndExpand"/>
+
+            <Label Text="Who's watching?"
+                   Grid.Row="0"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   HorizontalOptions="CenterAndExpand"
+                   FontFamily="Regular"
+                   FontSize="20"
+                   TextColor="White"/>
+        </StackLayout>
+
+        <Grid Grid.Row="1"
+              Grid.Column="0"
+              Grid.ColumnSpan="2"
+              Padding="40,0"
+              BackgroundColor="Black"
+              ColumnDefinitions="*,*">
+
+            <Frame BackgroundColor="Black"
+                   Grid.Column="0">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GotoHomePage}"/>
+                </Frame.GestureRecognizers>
+                <StackLayout>
+                    <ffimage:CachedImage Source="{images:ImageResource Netflix.Helpers.Images.smile.png}"
+                                         DownsampleToViewSize="True"
+                                         HeightRequest="100"/>
+                    <Label Text="Watcher 1"
+                           TextColor="White"
+                           FontFamily="Regular"
+                           HorizontalOptions="CenterAndExpand"
+                           FontSize="15"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="Black"
+                   Grid.Column="1">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GotoHomePage}"/>
+                </Frame.GestureRecognizers>
+                <StackLayout>
+                    <ffimage:CachedImage Source="{images:ImageResource Netflix.Helpers.Images.smile1.png}"
+                                         DownsampleToViewSize="True"
+                                         HeightRequest="100"/>
+                    <Label Text="Watcher 2"
+                           TextColor="White"
+                           FontFamily="Regular"
+                           HorizontalOptions="CenterAndExpand"
+                           FontSize="15"/>
+                </StackLayout>
+            </Frame>
+        </Grid>
+
+        <Grid Grid.Row="2"
+              Grid.Column="0"
+              Grid.ColumnSpan="2"
+              Padding="40,0"
+              BackgroundColor="Black"
+              ColumnDefinitions="*,*">
+
+            <Frame BackgroundColor="Black"
+                   Grid.Column="0">
+                <Label HorizontalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static fonts:Material.Add_circle}"
+                                  FontFamily="mat"
+                                  FontSize="120"
+                                  TextColor="White"/>
+                            <Span Text="&#10;"/>
+                            <Span Text="Add Profile"
+                                  FontSize="15"
+                                  FontFamily="Regular"
+                                  TextColor="White"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Frame>
+        </Grid>
+    </Grid>
+</ContentPage>

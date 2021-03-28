@@ -1,0 +1,67 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Helpers\Fonts\MaterialIconsOutlined-Regular.otf" />
+    <None Remove="Helpers\Fonts\Roboto-Bold.ttf" />
+    <None Remove="Helpers\Fonts\Roboto-Regular.ttf" />
+    <None Remove="Helpers\Images\n.png" />
+    <None Remove="Helpers\Images\netflix.png" />
+    <None Remove="Helpers\Images\smile.png" />
+    <None Remove="Helpers\Images\smile1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Helpers\Fonts\MaterialIconsOutlined-Regular.otf" />
+    <EmbeddedResource Include="Helpers\Fonts\Roboto-Bold.ttf" />
+    <EmbeddedResource Include="Helpers\Fonts\Roboto-Regular.ttf" />
+    <EmbeddedResource Include="Helpers\Images\n.png" />
+    <EmbeddedResource Include="Helpers\Images\netflix.png" />
+    <EmbeddedResource Include="Helpers\Images\smile.png" />
+    <EmbeddedResource Include="Helpers\Images\smile1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Refit" Version="6.0.38" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="18.4.0.49" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.6.1" />
+    <PackageReference Include="Prism.DryIoc.Forms" Version="8.0.0.1909" />
+    <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.2012" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Helpers\Renderers\CustomNavigation.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ComingSoonPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\HomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MainTabPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MyListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SearchPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ShowInfo.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Visual="Material"
+             BackgroundColor="Black"
+             Padding="10,25"
+             xmlns:fonts="clr-namespace:NoonGil.Helpers.Fonts"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="Netflix.Views.SearchPage">
+
+    <StackLayout>
+        <Frame Padding="0"
+               BackgroundColor="Black"
+               HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal">
+                <Entry ReturnCommand="{Binding SendRequest}"
+                       ReturnCommandParameter="{Binding SearchQuery}"
+                       Text="{Binding SearchQuery}"
+                       BackgroundColor="Black"
+                       Placeholder="Search for shows, movies, tv series"
+                       PlaceholderColor="Gray"
+                       ClearButtonVisibility="WhileEditing"
+                       HorizontalOptions="FillAndExpand"
+                       TextColor="White"/>
+                <Label Text="{x:Static fonts:Material.Search}"
+                       FontFamily="mat"
+                       FontSize="30"
+                       VerticalOptions="Center"
+                       HorizontalOptions="End"
+                       TextColor="White"/>
+            </StackLayout>
+        </Frame>
+
+        <CollectionView ItemsSource="{Binding Shows}"
+                        Margin="-10,0"
+                        ItemSizingStrategy="MeasureAllItems">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Frame BackgroundColor="Black"
+                               Padding="0"
+                               Margin="0,10">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShowInfoCommand}"
+                                                      CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="Auto,*">
+                                <ffimage:CachedImage Source="{Binding Thumbnail}"
+                                                     DownsampleToViewSize="True"
+                                                     BitmapOptimizations="True"
+                                                     HeightRequest="200"
+                                                     WidthRequest="150"
+                                                     Grid.Column="0"
+                                                     VerticalOptions="Center"/>
+                                <StackLayout Grid.Column="1"
+                                             VerticalOptions="StartAndExpand">
+                                    <Label Text="{Binding Title}"
+                                           FontFamily="Bold"
+                                           FontSize="30"
+                                           Margin="0,5"
+                                           TextColor="White"/>
+                                    <Label Text="{Binding Synopsis}"
+                                           FontFamily="Regular"
+                                           FontSize="14"
+                                           TextColor="White"/>
+                                    <Label Text="{Binding Casts, StringFormat='Starring: {0}'}"
+                                           FontFamily="Regular"
+                                           Margin="0,5"
+                                           TextColor="Gray"/>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

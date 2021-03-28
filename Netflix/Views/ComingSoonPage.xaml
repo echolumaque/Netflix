@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             BackgroundColor="Black"
+             x:Class="Netflix.Views.ComingSoonPage">
+
+    <StackLayout>
+        <Label Text="Coming Soon on Netflix"
+               FontFamily="Bold"
+               Margin="0,20,0,0"
+               TextColor="White"
+               FontSize="30"/>
+        <CollectionView ItemsSource="{Binding ComingSoon}"
+                        ItemSizingStrategy="MeasureAllItems">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Frame BackgroundColor="Black"
+                               Padding="0"
+                               Margin="0,10">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShowInfoCommand}"
+                                                      CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="Auto,*">
+                                <ffimage:CachedImage Source="{Binding Thumbnail}"
+                                                     DownsampleToViewSize="True"
+                                                     BitmapOptimizations="True"
+                                                     WidthRequest="150"
+                                                     HeightRequest="200"
+                                                     Grid.Column="0"
+                                                     VerticalOptions="Center"/>
+                                <StackLayout Grid.Column="1"
+                                             VerticalOptions="StartAndExpand">
+                                    <Label Text="{Binding Title}"
+                                           FontFamily="Bold"
+                                           FontSize="30"
+                                           Margin="0,5"
+                                           TextColor="White"/>
+                                    <Label Text="{Binding Synopsis}"
+                                           FontFamily="Regular"
+                                           FontSize="14"
+                                           TextColor="White"/>
+                                    <Label Text="{Binding Casts, StringFormat='Starring: {0}'}"
+                                           FontFamily="Regular"
+                                           Margin="0,5"
+                                           TextColor="Gray"/>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+  
+</ContentPage>

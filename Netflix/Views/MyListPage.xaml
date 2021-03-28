@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:ffcached="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             BackgroundColor="Black"
+             Visual="Material"
+             x:Class="Netflix.Views.MyListPage">
+
+    <StackLayout VerticalOptions="FillAndExpand"
+                 HorizontalOptions="FillAndExpand">
+        <CollectionView ItemsSource="{Binding List}"
+                        Margin="-10,0"
+                        ItemSizingStrategy="MeasureAllItems">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Frame BackgroundColor="Black"
+                               Padding="0"
+                               Margin="10,40">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShowInfo}"
+                                                      CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnDefinitions="Auto,*">
+                                <ffcached:CachedImage Source="{Binding Image}"
+                                                     DownsampleToViewSize="True"
+                                                     BitmapOptimizations="True"
+                                                     HeightRequest="200"
+                                                      WidthRequest="150"
+                                                     Grid.Column="0"
+                                                     VerticalOptions="Center"/>
+                                <StackLayout Grid.Column="1"
+                                             VerticalOptions="StartAndExpand">
+                                    <Label Text="{Binding Title}"
+                                           FontFamily="Bold"
+                                           FontSize="30"
+                                           Margin="0,5"
+                                           TextColor="White"/>
+                                    <Label Text="{Binding Synopsis}"
+                                           FontFamily="Regular"
+                                           FontSize="14"
+                                           TextColor="White"/>
+                                    <Label Text="{Binding Casts, StringFormat='Starring: {0}'}"
+                                           FontFamily="Regular"
+                                           Margin="0,5"
+                                           TextColor="Gray"/>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+  
+</ContentPage>

@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:ffcached="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Visual="Material"
+             BackgroundColor="Black"
+             xmlns:font="clr-namespace:NoonGil.Helpers.Fonts"
+             xmlns:images="clr-namespace:Netflix.Helpers.Images"
+             xmlns:transformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="Netflix.Views.HomePage">
+    <StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Frame Padding="0"
+                       BackgroundColor="Black">
+                    <Grid RowDefinitions="Auto, Auto"
+                          ColumnDefinitions="Auto,*,*,*">
+
+                        <ffcached:CachedImage Source="{Binding Thumbnail}"
+                                              BitmapOptimizations="True"
+                                              Grid.Column="0"
+                                              VerticalOptions="FillAndExpand"
+                                              HeightRequest="600"
+                                              HorizontalOptions="FillAndExpand"
+                                              Grid.ColumnSpan="4"
+                                              Grid.Row="0"/>
+
+                        <ffcached:CachedImage Source="{images:ImageResource Netflix.Helpers.Images.n.png}"
+                                              Grid.Row="0"
+                                              Grid.Column="0"
+                                              Margin="10,40,20,0"
+                                              VerticalOptions="StartAndExpand"
+                                              HeightRequest="50"
+                                              HorizontalOptions="StartAndExpand"/>
+                        <Label Text="TV Shows"
+                               FontFamily="Regular"
+                               Margin="0,40,0,0"
+                               TextColor="White"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="StartAndExpand"
+                               Grid.Column="1"
+                               FontSize="20"
+                               Grid.Row="0"/>
+                        <Label Text="Movies"
+                               Margin="0,40,0,0"
+                               VerticalOptions="StartAndExpand"
+                               HorizontalOptions="CenterAndExpand"
+                               FontSize="20"
+                               FontFamily="Regular"
+                               TextColor="White"
+                               Grid.Column="2"
+                               Grid.Row="0"/>
+                        <Label Text="My List"
+                               Margin="0,40,0,0"
+                               VerticalOptions="StartAndExpand"
+                               HorizontalOptions="CenterAndExpand"
+                               FontSize="20"
+                               FontFamily="Regular"
+                               TextColor="White"
+                               Grid.Column="3"
+                               Grid.Row="0">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GotoMyListPageCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        
+                        
+                        <Frame Padding="0"
+                               Grid.ColumnSpan="4"
+                               Margin="0,10"
+                               BackgroundColor="Transparent"
+                               HasShadow="False"
+                               VerticalOptions="EndAndExpand"
+                               Grid.Row="0">
+                            <StackLayout>
+                                <Label Text="{Binding Genre}"
+                                       FontFamily="Bold"
+                                       TextColor="White"
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="4"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalOptions="EndAndExpand"
+                                       HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </Frame>
+
+                <Grid ColumnDefinitions="*,*,*">
+                    <Label Grid.Column="0"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalTextAlignment="Center">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddToListCommand}"/>
+                        </Label.GestureRecognizers>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static font:Material.Add}"
+                                      FontFamily="mat"
+                                      FontSize="30"
+                                      TextColor="White"/>
+                                <Span Text="&#10;"/>
+                                <Span Text="My List"
+                                      TextColor="White"
+                                      FontFamily="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Frame Grid.Column="1"
+                           Padding="10"
+                           CornerRadius="10"
+                           BackgroundColor="White">
+                        <StackLayout Orientation="Horizontal"
+                                     VerticalOptions="CenterAndExpand"
+                                     Spacing="0"
+                                     HorizontalOptions="CenterAndExpand">
+                            <Label Text="{x:Static font:Material.Play_arrow}"
+                                   FontFamily="mat"
+                                   TextColor="Black"
+                                   FontSize="30"/>
+                            <Label Text="Play"
+                                   FontFamily="Bold"
+                                   TextColor="Black"
+                                   FontSize="20"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <Label Grid.Column="2"
+                                           VerticalOptions="CenterAndExpand"
+                                           HorizontalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{x:Static font:Material.Info}"
+                                      FontFamily="mat"
+                                      FontSize="30"
+                                      TextColor="White"/>
+                                <Span Text="&#10;"/>
+                                <Span Text="Info"
+                                      TextColor="White"
+                                      FontFamily="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowInfoCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
+
+                <Grid RowDefinitions="Auto,100,Auto,220,Auto,220,Auto,220,Auto,220"
+                      Margin="0,20"
+                      RowSpacing="20">
+
+                    <Label Text="Previews"
+                           Grid.Row="0"
+                           FontFamily="Bold"
+                           TextColor="White"
+                           FontSize="30"/>
+
+                    <CollectionView ItemsSource="{Binding AllShows}"
+                                    ItemSizingStrategy="MeasureAllItems"
+                                    Grid.Row="1"
+                                    ItemsLayout="HorizontalList">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Horizontal"
+                                             Margin="10,0">
+                                    <ffcached:CachedImage Source="{Binding Thumbnail}"
+                                                          VerticalOptions="FillAndExpand"
+                                                          HorizontalOptions="Center">
+                                        <ffcached:CachedImage.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ShowInfoCommand}"
+                                                                  CommandParameter="{Binding .}"/>
+                                        </ffcached:CachedImage.GestureRecognizers>
+                                        <ffcached:CachedImage.Transformations>
+                                            <transformation:CircleTransformation/>
+                                        </ffcached:CachedImage.Transformations>
+                                    </ffcached:CachedImage>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Label Text="Popular on Netflix"
+                           Grid.Row="2"
+                           FontFamily="Bold"
+                           TextColor="White"
+                           FontSize="30"/>
+
+                    <CollectionView ItemsSource="{Binding Popular}"
+                                    ItemSizingStrategy="MeasureAllItems"
+                                    Grid.Row="3"
+                                    ItemsLayout="HorizontalList">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Horizontal"
+                                             Margin="10,0">
+                                    <ffcached:CachedImage Source="{Binding Thumbnail}"
+                                                          VerticalOptions="FillAndExpand"
+                                                          HorizontalOptions="Center">
+                                        <ffcached:CachedImage.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ShowInfoCommand}"
+                                                                  CommandParameter="{Binding .}"/>
+                                        </ffcached:CachedImage.GestureRecognizers>
+                                    </ffcached:CachedImage>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Label Text="Action"
+                           Grid.Row="4"
+                           FontFamily="Bold"
+                           TextColor="White"
+                           FontSize="30"/>
+
+                    <CollectionView ItemsSource="{Binding Action}"
+                                    ItemSizingStrategy="MeasureAllItems"
+                                    Grid.Row="5"
+                                    ItemsLayout="HorizontalList">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Horizontal"
+                                             Margin="10,0">
+                                    <ffcached:CachedImage Source="{Binding Thumbnail}"
+                                                          VerticalOptions="FillAndExpand"
+                                                          HorizontalOptions="Center">
+                                        <ffcached:CachedImage.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ShowInfoCommand}"
+                                                                  CommandParameter="{Binding .}"/>
+                                        </ffcached:CachedImage.GestureRecognizers>
+                                    </ffcached:CachedImage>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Label Text="Comedy"
+                           Grid.Row="6"
+                           FontFamily="Bold"
+                           TextColor="White"
+                           FontSize="30"/>
+
+                    <CollectionView ItemsSource="{Binding Comedy}"
+                                    ItemSizingStrategy="MeasureAllItems"
+                                    Grid.Row="7"
+                                    ItemsLayout="HorizontalList">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Horizontal"
+                                             Margin="10,0">
+                                    <ffcached:CachedImage Source="{Binding Thumbnail}"
+                                                          VerticalOptions="FillAndExpand"
+                                                          HorizontalOptions="Center">
+                                        <ffcached:CachedImage.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ShowInfoCommand}"
+                                                                  CommandParameter="{Binding .}"/>
+                                        </ffcached:CachedImage.GestureRecognizers>
+                                    </ffcached:CachedImage>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <Label Text="Coming Soon on Netflix"
+                           Grid.Row="8"
+                           FontFamily="Bold"
+                           TextColor="White"
+                           FontSize="30"/>
+
+                    <CollectionView ItemsSource="{Binding ComingSoon}"
+                                    ItemSizingStrategy="MeasureAllItems"
+                                    Grid.Row="9"
+                                    ItemsLayout="HorizontalList">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Horizontal"
+                                             Margin="10,0">
+                                    <ffcached:CachedImage Source="{Binding Thumbnail}"
+                                                          VerticalOptions="FillAndExpand"
+                                                          HorizontalOptions="Center">
+                                        <ffcached:CachedImage.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding ShowInfoCommand}"
+                                                                  CommandParameter="{Binding .}"/>
+                                        </ffcached:CachedImage.GestureRecognizers>
+                                    </ffcached:CachedImage>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>
