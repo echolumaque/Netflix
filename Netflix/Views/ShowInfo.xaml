@@ -17,8 +17,7 @@
                 <ffcached:CachedImage Source="{Binding Thumbnail}"
                                       BitmapOptimizations="True"
                                       DownsampleToViewSize="True"
-                                      HorizontalOptions="FillAndExpand"
-                                      LoadingPlaceholder="{images:ImageResource Netflix.Helpers.Images.vid.png}"/>
+                                      HorizontalOptions="FillAndExpand"/>
 
                 <Label Text="{Binding TitleOfShow}"
                        FontFamily="Bold"
