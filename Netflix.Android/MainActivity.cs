@@ -30,23 +30,22 @@ namespace Netflix.Droid
 
             if (Build.VERSION.SdkInt <= BuildVersionCodes.Q)
             {
-                Window.SetStatusBarColor(Color.Transparent);
+                Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
                 Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
-                Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
-                Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-                Window.AddFlags(WindowManagerFlags.LayoutInScreen);
+                Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
+                Window.AddFlags(WindowManagerFlags.LayoutInOverscan);
                 Window.ClearFlags(WindowManagerFlags.Fullscreen);
             }
-            else if(Build.VERSION.SdkInt == BuildVersionCodes.R || Build.VERSION.SdkInt != BuildVersionCodes.R)
-            {
-                Window.SetStatusBarColor(Color.Transparent);
-                Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
-                Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
-                Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-                Window.AddFlags(WindowManagerFlags.LayoutInScreen);
-                Window.ClearFlags(WindowManagerFlags.Fullscreen);
-                Window.SetDecorFitsSystemWindows(false);
-            }
+            //else if(Build.VERSION.SdkInt == BuildVersionCodes.R || Build.VERSION.SdkInt != BuildVersionCodes.R)
+            //{
+            //    Window.SetStatusBarColor(Color.Transparent);
+            //    Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
+            //    Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
+            //    Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+            //    Window.AddFlags(WindowManagerFlags.LayoutInScreen);
+            //    Window.ClearFlags(WindowManagerFlags.Fullscreen);
+            //    Window.SetDecorFitsSystemWindows(false);
+            //}
             else
             {
                 Window.SetStatusBarColor(Color.Transparent);
