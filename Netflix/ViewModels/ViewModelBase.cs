@@ -4,6 +4,8 @@ using System.Text;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services.Dialogs;
+using Xamarin.Forms;
 
 namespace Netflix.ViewModels
 {
@@ -28,6 +30,7 @@ namespace Netflix.ViewModels
 
         }
 
+
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
 
@@ -42,5 +45,6 @@ namespace Netflix.ViewModels
         {
 
         }
+
     }
 }

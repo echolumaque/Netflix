@@ -7,7 +7,7 @@
              Visual="Material"
              BackgroundColor="Black"
              xmlns:images="clr-namespace:Netflix.Helpers.Images"
-             xmlns:fonts="clr-namespace:NoonGil.Helpers.Fonts"
+             xmlns:fonts="clr-namespace:Netflix.Helpers.Fonts"
              x:Class="Netflix.Views.LoginPage">
 
     <Grid RowDefinitions="Auto,Auto,Auto"

@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Padding="0,40,0,0"
+             BackgroundColor="Black"
+             Visual="Material"
+             xmlns:ffcached="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fonts="clr-namespace:Netflix.Helpers.Fonts"
+             x:Class="Netflix.Views.EpisodePage">
+
+    <ScrollView>
+        <StackLayout Spacing="10">
+
+            <ffcached:CachedImage Source="{Binding InfoThumbnail}"
+                                  BitmapOptimizations="True"
+                                  DownsampleToViewSize="True"
+                                  HorizontalOptions="FillAndExpand"/>
+
+            <Label Text="{Binding TitleOfShow}"
+                   FontFamily="Bold"
+                   TextColor="White"
+                   FontSize="30"/>
+
+            <StackLayout Orientation="Horizontal"
+                         Spacing="10">
+                <Label Text="New"
+                       TextColor="#7ED38D"
+                       FontFamily="Bold"/>
+
+                <Label Text="{Binding Year}"
+                       TextColor="Gray"
+                       FontFamily="Regular"/>
+
+                <Frame BackgroundColor="#343434"
+                       Padding="5,-1"
+                       CornerRadius="0"
+                       VerticalOptions="CenterAndExpand">
+                    <Label Text="16+"
+                           FontFamily="Regular"
+                           TextColor="White"/>
+                </Frame>
+
+                <Label Text="12 Seasons"
+                       TextColor="Gray"
+                       FontFamily="Regular"/>
+
+                <Frame BackgroundColor="#B4B4B4"
+                       Padding="5,-1"
+                       CornerRadius="0"
+                       VerticalOptions="CenterAndExpand">
+                    <Label Text="HD"
+                           FontFamily="Bold"
+                           TextColor="Black"/>
+                </Frame>
+            </StackLayout>
+
+            <Label Text="Watch Season 1 Now"
+                   FontFamily="Bold"
+                   TextColor="White"
+                   FontSize="17"/>
+
+            <Frame HorizontalOptions="FillAndExpand"
+                   BackgroundColor="White"
+                   Padding="8"
+                   Margin="0,10,0,5">
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="CenterAndExpand">
+                    <Label Text="{x:Static fonts:Material.Play_arrow}"
+                           FontFamily="mat"
+                           VerticalOptions="Center"
+                           FontSize="30"
+                           TextColor="Black"/>
+                    <Label Text="Play"
+                           FontFamily="Bold"
+                           FontSize="15"
+                           VerticalOptions="Center"
+                           TextColor="Black"/>
+                </StackLayout>
+            </Frame>
+
+            <Frame HorizontalOptions="FillAndExpand"
+                   Padding="8"
+                   BackgroundColor="#252525">
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="CenterAndExpand">
+                    <Label Text="{x:Static fonts:Material.Download}"
+                           FontFamily="mat"
+                           VerticalOptions="Center"
+                           FontSize="30"
+                           TextColor="White"/>
+                    <Label Text="Download S1:E1"
+                           FontFamily="Bold"
+                           VerticalOptions="Center"
+                           FontSize="15"
+                           TextColor="White"/>
+                </StackLayout>
+            </Frame>
+
+            <Label Text="{Binding Synopsis}"
+                   FontFamily="Regular"
+                   TextColor="White"
+                   LineHeight="1.2"/>
+
+            <Label FontFamily="Regular">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Starring: "
+                              TextColor="White"/>
+                        <Span Text="{Binding Casts}"
+                              TextColor="Gray"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <Grid ColumnDefinitions="*,*,*"
+                  WidthRequest="300"
+                  HorizontalOptions="Start">
+                
+                <Label Grid.Column="0"
+                       HorizontalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static fonts:Material.Add}"
+                                  FontFamily="mat"
+                                  FontSize="20"
+                                  TextColor="White"/>
+                            <Span Text="&#10;"/>
+                            <Span Text="My List"
+                                  FontFamily="Regular"
+                                  TextColor="Gray"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Grid.Column="1"
+                       HorizontalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static fonts:Material.Thumb_up}"
+                                  FontFamily="mat"
+                                  FontSize="20"
+                                  TextColor="White"/>
+                            <Span Text="&#10;"/>
+                            <Span Text="Rate"
+                                  FontFamily="Regular"
+                                  TextColor="Gray"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Grid.Column="2"
+                       HorizontalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static fonts:Material.Share}"
+                                  FontFamily="mat"
+                                  FontSize="20"
+                                  TextColor="White"/>
+                            <Span Text="&#10;"/>
+                            <Span Text="Share"
+                                  FontFamily="Regular"
+                                  TextColor="Gray"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+
+            <BoxView Color="Gray"
+                     HeightRequest="1"
+                     HorizontalOptions="FillAndExpand"
+                     Margin="0,10"/>
+
+            <StackLayout Orientation="Horizontal"
+                         Spacing="30">
+                <Label Text="EPISODES"
+                       FontFamily="Bold"
+                       TextColor="White"/>
+                <Label Text="MORE LIKE THIS"
+                       FontFamily="Bold"
+                       TextColor="Gray"/>
+            </StackLayout>
+
+            <Label Text="Season 1"
+                   TextColor="White"
+                   FontFamily="Bold"
+                   Margin="10"/>
+
+            <CollectionView ItemsSource="{Binding Episodes}"
+                            Margin="0,0,0,25">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="150,*,Auto"
+                              Margin="0,10">
+                            <ffcached:CachedImage Source="{Binding InfoThumbnail}"
+                                                  BitmapOptimizations="True"
+                                                  DownsampleToViewSize="True"
+                                                  Grid.Column="0"/>
+
+                            <StackLayout Grid.Column="1"
+                                         Margin="10,0">
+                                <Label Text="{Binding EpisodeNumber, StringFormat='{0}. Episode {0}'}"
+                                       TextColor="White"
+                                       FontSize="18"
+                                       FontFamily="Bold"/>
+                                <Label Text="22m"
+                                       TextColor="Gray"
+                                       FontSize="15"
+                                       FontFamily="Regular"/>
+                            </StackLayout>
+
+                            <Label Text="{x:Static fonts:Material.Download}"
+                                   TextColor="White"
+                                   FontFamily="mat"
+                                   FontSize="30"
+                                   VerticalOptions="Center"
+                                   Grid.Column="2"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,4 +1,4 @@
-﻿namespace NoonGil.Helpers.Fonts
+﻿namespace Netflix.Helpers.Fonts
 {
     public static class Material
     {

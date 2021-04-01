@@ -2,9 +2,9 @@
 
 namespace Netflix.Views
 {
-    public partial class ShowInfo : ContentPage
+    public partial class InfoPopupPage
     {
-        public ShowInfo()
+        public InfoPopupPage()
         {
             InitializeComponent();
         }

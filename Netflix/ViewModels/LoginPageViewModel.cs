@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Navigation;
+using Prism.Services.Dialogs;
 
 namespace Netflix.ViewModels
 {
@@ -16,6 +17,6 @@ namespace Netflix.ViewModels
 
         }
 
-        private async Task HomePage() => await navigationService.NavigateAsync("/CustomNavigation/MainTabPage");
+        private async Task HomePage() => await navigationService.NavigateAsync("/MainTabPage");
     }
 }

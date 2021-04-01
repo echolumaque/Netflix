@@ -6,35 +6,28 @@
             android:TabbedPage.BarItemColor="Gray"
             android:TabbedPage.BarSelectedItemColor="White"
             BarBackgroundColor="Black"
-            xmlns:fonts="clr-namespace:NoonGil.Helpers.Fonts"
+            xmlns:fonts="clr-namespace:Netflix.Helpers.Fonts"
             xmlns:pages="clr-namespace:Netflix.Views"
             x:Class="Netflix.Views.MainTabPage">
 
     <pages:HomePage Title="Home">
         <pages:HomePage.IconImageSource>
-            <FontImageSource FontFamily="mat"
-                             Glyph="{x:Static fonts:Material.Home}"
+            <FontImageSource FontFamily="matf"
+                             Glyph="{x:Static fonts:MaterialFilled.Home}"
                              Color="White"/>
         </pages:HomePage.IconImageSource>
     </pages:HomePage>
 
-    <pages:SearchPage Title="Search">
-        <pages:SearchPage.IconImageSource>
-            <FontImageSource FontFamily="mat"
-                             Glyph="{x:Static fonts:Material.Search}"
-                             Color="White"/>
-        </pages:SearchPage.IconImageSource>
-    </pages:SearchPage>
-
+   
     <pages:ComingSoonPage Title="Coming Soon">
         <pages:ComingSoonPage.IconImageSource>
-            <FontImageSource FontFamily="mat"
-                             Glyph="{x:Static fonts:Material.Ondemand_video}"
+            <FontImageSource FontFamily="matf"
+                             Glyph="{x:Static fonts:MaterialFilled.Video_library}"
                              Color="White"/>
         </pages:ComingSoonPage.IconImageSource>
     </pages:ComingSoonPage>
 
-    <ContentPage Title="Downloads">
+    <!--<ContentPage Title="Downloads">
         <ContentPage.IconImageSource>
             <FontImageSource FontFamily="mat"
                              Glyph="{x:Static fonts:Material.Download}"
@@ -48,5 +41,5 @@
                              Glyph="{x:Static fonts:Material.Menu}"
                              Color="White"/>
         </ContentPage.IconImageSource>
-    </ContentPage>
+    </ContentPage>-->
 </TabbedPage>

@@ -15,6 +15,7 @@ using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
 
 
+[assembly: ExportFont("MaterialIcons-Regular.ttf", Alias = "matf")]
 [assembly: ExportFont("MaterialIconsOutlined-Regular.otf", Alias = "mat")]
 [assembly: ExportFont("Roboto-Bold.ttf", Alias = "Bold")]
 [assembly: ExportFont("Roboto-Regular.ttf", Alias = "Regular")]
@@ -33,7 +34,7 @@ namespace Netflix
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDE3MDA4QDMxMzgyZTM0MmUzMFFWMG5rL1FyNFZLNnhRdEFESVdpYmJ6QjB3Y3IzRytpc3lqQXVQeGV5NDQ9");
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("CustomNavigation/LoginPage");
+            await NavigationService.NavigateAsync("LoginPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -45,9 +46,8 @@ namespace Netflix
 
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
-            containerRegistry.RegisterForNavigation<MyListPage, MyListPageViewModel>();
-            containerRegistry.RegisterForNavigation<ShowInfo, ShowInfoViewModel>();
-            containerRegistry.RegisterForNavigation<SearchPage, SearchPageViewModel>();
+            containerRegistry.RegisterDialog<InfoPopupPage, InfoPopupPageViewModel>();
+            containerRegistry.RegisterForNavigation<EpisodePage, EpisodePageViewModel>();
             containerRegistry.RegisterForNavigation<ComingSoonPage, ComingSoonPageViewModel>();
         }
 

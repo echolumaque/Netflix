@@ -36,16 +36,16 @@ namespace Netflix.Droid
                 Window.AddFlags(WindowManagerFlags.LayoutInOverscan);
                 Window.ClearFlags(WindowManagerFlags.Fullscreen);
             }
-            //else if(Build.VERSION.SdkInt == BuildVersionCodes.R || Build.VERSION.SdkInt != BuildVersionCodes.R)
-            //{
-            //    Window.SetStatusBarColor(Color.Transparent);
-            //    Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
-            //    Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
-            //    Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-            //    Window.AddFlags(WindowManagerFlags.LayoutInScreen);
-            //    Window.ClearFlags(WindowManagerFlags.Fullscreen);
-            //    Window.SetDecorFitsSystemWindows(false);
-            //}
+            else if (Build.VERSION.SdkInt == BuildVersionCodes.R || Build.VERSION.SdkInt != BuildVersionCodes.R)
+            {
+                Window.SetStatusBarColor(Color.Transparent);
+                Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
+                Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
+                Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+                Window.AddFlags(WindowManagerFlags.LayoutInScreen);
+                Window.ClearFlags(WindowManagerFlags.Fullscreen);
+                Window.SetDecorFitsSystemWindows(false);
+            }
             else
             {
                 Window.SetStatusBarColor(Color.Transparent);
@@ -59,6 +59,7 @@ namespace Netflix.Droid
 
             LoadApplication(new App(new AndroidInitializer()));
         }
+
 
         public override Resources Resources
         {
