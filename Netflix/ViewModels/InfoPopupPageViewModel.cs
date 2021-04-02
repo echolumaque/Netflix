@@ -5,6 +5,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services.Dialogs;
+using Xamarin.Essentials;
 
 namespace Netflix.ViewModels
 {
@@ -42,7 +43,7 @@ namespace Netflix.ViewModels
         #region Properties
 
         private string title;
-        public string Title
+        public new string Title
         {
             get { return title; }
             set { SetProperty(ref title, value); }
@@ -99,7 +100,8 @@ namespace Netflix.ViewModels
                         Year = Year,
                         Synopsis = Synopsis,
                         Casts = Casts,
-                        InfoThumbnail = InfoThumbnail
+                        InfoThumbnail = InfoThumbnail,
+                        Thumbnail = Thumbnail
                     }
                 }
             };

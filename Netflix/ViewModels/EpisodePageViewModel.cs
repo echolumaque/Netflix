@@ -1,17 +1,24 @@
 ﻿using System.Collections.ObjectModel;
-using Netflix.Models;
-using Prism.Navigation;
-using Prism.AppModel;
 using System.Threading.Tasks;
+using Netflix.Helpers.Dependency;
+using Netflix.Models;
+using Prism.Commands;
+using Prism.Navigation;
+using Xamarin.Forms;
 
 namespace Netflix.ViewModels
 {
     public class EpisodePageViewModel : ViewModelBase, IInitialize
     {
         public INavigationService navigationService;
-        public EpisodePageViewModel(INavigationService navigationService) : base(navigationService)
+        private IToast toast;
+        public DelegateCommand AddToListCommand { get; }
+
+        public EpisodePageViewModel(INavigationService navigationService, IToast toast) : base(navigationService)
         {
             this.navigationService = navigationService;
+            this.toast = toast;
+            AddToListCommand = new DelegateCommand(async () => await AddtoList());
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -21,7 +28,7 @@ namespace Netflix.ViewModels
             Synopsis = parameters.GetValue<MovieModel>("show").Synopsis;
             Casts = parameters.GetValue<MovieModel>("show").Casts;
             InfoThumbnail = parameters.GetValue<MovieModel>("show").InfoThumbnail;
-
+            Thumbnail = parameters.GetValue<MovieModel>("show").Thumbnail;
             var episodes = new ObservableCollection<MovieModel>();
             for (int i = 1; i < 11; i++)
             {
@@ -35,6 +42,7 @@ namespace Netflix.ViewModels
             Episodes = new ObservableCollection<MovieModel>(episodes);
         }
         #region Properties
+        private string Thumbnail;
 
         private ObservableCollection<MovieModel> episodes;
         public ObservableCollection<MovieModel> Episodes
@@ -80,6 +88,26 @@ namespace Netflix.ViewModels
         #endregion
 
         #region Methods
+
+        private async Task AddtoList()
+        {
+            await App.CreateDatabaseTable<MovieModel>().ConfigureAwait(false);
+
+            var listItem = new MovieModel
+            {
+                Title = TitleOfShow,
+                Year = Year,
+                Synopsis = Synopsis,
+                Casts = Casts,
+                InfoThumbnail = InfoThumbnail,
+                Thumbnail = Thumbnail
+            };
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                toast.ShowToast("Succesfully added to your list");
+            });
+            await App.ConnectionString.InsertAsync(listItem).ConfigureAwait(false);
+        }
         #endregion
     }
 }

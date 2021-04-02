@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 using Prism.Commands;
+using SQLite;
 
 namespace Netflix.Models
 {
@@ -15,6 +16,7 @@ namespace Netflix.Models
         public string Title { get; set; }
     
         [JsonProperty("Genre")]
+        [Ignore]
         public string[] Genre { get; set; }
     
         [JsonProperty("IsFeatured")]
@@ -34,7 +36,7 @@ namespace Netflix.Models
 
         [JsonProperty("Casts")]
         public string Casts { get; set; }
-
+        [Ignore]
         public DelegateCommand<MovieModel> ShowInfoCommand { get; set; }
 
         [JsonProperty("Year")]
@@ -47,6 +49,7 @@ namespace Netflix.Models
         public string InfoThumbnail { get; set; }
 
         [JsonIgnore]
+        [Ignore]
         public int EpisodeNumber { get; set; }
     }
 }

@@ -1,7 +1,5 @@
-﻿using Xamarin.Forms;
-using Netflix.ViewModels;
-using System.Threading.Tasks;
-using Prism.Navigation;
+﻿using Netflix.ViewModels;
+using Xamarin.Forms;
 
 namespace Netflix.Views
 {
@@ -15,7 +13,7 @@ namespace Netflix.Views
         protected override bool OnBackButtonPressed()
         {
             var vm = (EpisodePageViewModel)BindingContext;
-            vm.navigationService.NavigateAsync("/MainTabPage");
+            vm.navigationService.NavigateAsync("/CustomNavigation/MainTabPage");
             return base.OnBackButtonPressed();
         }
     }

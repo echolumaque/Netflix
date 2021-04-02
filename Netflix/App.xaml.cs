@@ -10,6 +10,7 @@ using Netflix.Views;
 using Prism;
 using Prism.Ioc;
 using SQLite;
+using Xamarin.Essentials;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
@@ -33,7 +34,7 @@ namespace Netflix
         {
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDE3MDA4QDMxMzgyZTM0MmUzMFFWMG5rL1FyNFZLNnhRdEFESVdpYmJ6QjB3Y3IzRytpc3lqQXVQeGV5NDQ9");
             InitializeComponent();
-
+            Preferences.Set("search", string.Empty);
             await NavigationService.NavigateAsync("LoginPage");
         }
 
@@ -49,14 +50,11 @@ namespace Netflix
             containerRegistry.RegisterDialog<InfoPopupPage, InfoPopupPageViewModel>();
             containerRegistry.RegisterForNavigation<EpisodePage, EpisodePageViewModel>();
             containerRegistry.RegisterForNavigation<ComingSoonPage, ComingSoonPageViewModel>();
+            containerRegistry.RegisterForNavigation<SearchPage, SearchPageViewModel>();
+            containerRegistry.RegisterForNavigation<MyListPage, MyListPageViewModel>();
         }
 
-        private static HttpClientHandler handler = new HttpClientHandler
-        {
-            AutomaticDecompression = DecompressionMethods.Deflate,
-        };
-
-        public static HttpClient LocalAPI = new HttpClient(handler)
+        public static HttpClient LocalAPI = new(new HttpClientHandler {AutomaticDecompression = DecompressionMethods.Deflate} )
         {
             BaseAddress = new Uri("http://echo.somee.com/netflixapp")
         };

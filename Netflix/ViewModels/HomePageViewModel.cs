@@ -1,11 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Netflix.Helpers.API.Interfaces;
+using Netflix.Helpers.Dependency;
 using Netflix.Models;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services.Dialogs;
-using Refit;
+using Xamarin.Forms;
 
 namespace Netflix.ViewModels
 {
@@ -13,17 +13,26 @@ namespace Netflix.ViewModels
     {
         private INavigationService navigationService;
         private IDialogService dialogService;
+        private IToast toast;
         public DelegateCommand ShowInfo { get; }
-        public HomePageViewModel(INavigationService navigationService, IDialogService dialogService) : base(navigationService)
+        public DelegateCommand GotoSearchPageCommand { get; }
+        public DelegateCommand GotoMyListPage { get; }
+        public DelegateCommand AddtoListCommand { get; }
+
+        public HomePageViewModel(INavigationService navigationService, IDialogService dialogService, IToast toast) : base(navigationService)
         {
             this.navigationService = navigationService;
             this.dialogService = dialogService;
+            this.toast = toast;
             ShowInfo = new DelegateCommand(async () => await ShowPopup());
+            GotoSearchPageCommand = new DelegateCommand(async  () => await this.navigationService.NavigateAsync("SearchPage"));
+            GotoMyListPage = new DelegateCommand(async () => await this.navigationService.NavigateAsync("MyListPage"));
+            AddtoListCommand = new DelegateCommand(async () => await AddtoList());
         }
 
         public override async void Initialize(INavigationParameters parameters)
         {
-            var featuredShow = await RestService.For<IMovie>(App.LocalAPI).GetFeaturedShow();
+            var featuredShow = await API.GetFeaturedShow();
 
             Thumbnail = featuredShow.Thumbnail;
             Genres = string.Join(" • ", featuredShow.Genre);
@@ -33,11 +42,11 @@ namespace Netflix.ViewModels
             Casts = featuredShow.Casts;
             infoThumbnail = featuredShow.InfoThumbnail;
 
-            var popular =  RestService.For<IMovie>(App.LocalAPI).GetPopularShows();
-            var action =  RestService.For<IMovie>(App.LocalAPI).GetActionShows();
-            var comedy =  RestService.For<IMovie>(App.LocalAPI).GetComedyShows();
-            var comingSoon =  RestService.For<IMovie>(App.LocalAPI).GetComingSoonShows();
-            var allShows =  RestService.For<IMovie>(App.LocalAPI).GetAllShows();
+            var popular =  API.GetPopularShows();
+            var action =  API.GetActionShows();
+            var comedy =  API.GetComedyShows();
+            var comingSoon =  API.GetComingSoonShows();
+            var allShows =  API.GetAllShows();
 
             await Task.WhenAll(popular, action, comedy, comingSoon, allShows);
 
@@ -192,6 +201,26 @@ namespace Netflix.ViewModels
             };
 
             await dialogService.ShowDialogAsync("InfoPopupPage", parameters);
+        }
+
+        private async Task AddtoList()
+        {
+            await App.CreateDatabaseTable<MovieModel>().ConfigureAwait(false);
+
+            var listItem = new MovieModel
+            {
+                Title = TitleOfShow,
+                Year = Year,
+                Synopsis = Synopsis,
+                Casts = Casts,
+                InfoThumbnail = infoThumbnail,
+                Thumbnail = Thumbnail
+            };
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                toast.ShowToast("Succesfully added to your list");
+            });
+            await App.ConnectionString.InsertAsync(listItem).ConfigureAwait(false);
         }
         #endregion
     }

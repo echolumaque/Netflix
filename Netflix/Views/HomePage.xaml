@@ -54,7 +54,11 @@
                                FontFamily="mat"
                                VerticalOptions="Center"
                                FontSize="25"
-                               TextColor="White"/>
+                               TextColor="White">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GotoSearchPageCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
 
                         <ffcached:CachedImage Source="{images:ImageResource Netflix.Helpers.Images.smile.png}"
                                               BitmapOptimizations="True"
@@ -84,7 +88,11 @@
                            TextColor="White"
                            Grid.Column="2"
                            HorizontalOptions="Center"
-                           Grid.Row="1"/>
+                           Grid.Row="1">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GotoMyListPage}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
                 </Grid>
 
                 <Grid Grid.Row="2"
@@ -122,6 +130,9 @@
                                       TextColor="Gray"/>
                             </FormattedString>
                         </Label.FormattedText>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding AddtoListCommand}"/>
+                        </Label.GestureRecognizers>
                     </Label>
 
                     <Frame BackgroundColor="White"

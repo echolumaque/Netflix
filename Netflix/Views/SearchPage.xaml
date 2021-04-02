@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             BackgroundColor="Black"
+             Padding="0,40,0,0"
+             xmlns:ffcached="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fonts="clr-namespace:Netflix.Helpers.Fonts"
+             xmlns:renderer="clr-namespace:Netflix.Helpers.Renderers"
+             xmlns:template="clr-namespace:Netflix.Helpers"
+             x:Class="Netflix.Views.SearchPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <DataTemplate x:Key="baseTemplate">
+                <StackLayout Margin="0,1">
+                    <Frame Padding="0"
+                           BackgroundColor="#201F1D">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowInfoCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout Orientation="Horizontal">
+                            <ffcached:CachedImage Source="{Binding Thumbnail}"
+                                                  DownsampleToViewSize="True"
+                                                  HeightRequest="100"
+                                                  WidthRequest="100"
+                                                  Margin="-18,0,0,0"
+                                                  BitmapOptimizations="True"/>
+                            <Label Text="{Binding Title}"
+                                   FontFamily="Regular"
+                                   TextColor="White"
+                                   FontSize="15"
+                                   VerticalOptions="Center"/>
+                            <Label Text="{x:Static fonts:Material.Play_circle_outline}"
+                                   FontFamily="mat"
+                                   TextColor="White"
+                                   FontSize="30"
+                                   Margin="0,0,20,0"
+                                   HorizontalOptions="EndAndExpand"
+                                   VerticalTextAlignment="Center"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </DataTemplate>
+
+            <DataTemplate x:Key="searchTemplate">
+                <StackLayout>
+                    <ffcached:CachedImage Source="{Binding Thumbnail}"
+                                            DownsampleToViewSize="True"
+                                            BitmapOptimizations="True"
+                                            Margin="3"
+                                            WidthRequest="150">
+                        <ffcached:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShowInfoCommand}"
+                                                  CommandParameter="{Binding .}"/>
+                        </ffcached:CachedImage.GestureRecognizers>
+                    </ffcached:CachedImage>
+                </StackLayout>
+            </DataTemplate>
+
+            <template:TemplateSelector x:Key="templateSelector"
+                                       BaseTemplate="{StaticResource baseTemplate}"
+                                       SearchTemplate="{StaticResource searchTemplate}"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <Frame BackgroundColor="#323232"
+               Padding="0"
+               HorizontalOptions="FillAndExpand">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{x:Static fonts:Material.Search}"
+                       TextColor="White"
+                       FontSize="30"
+                       VerticalOptions="Center"
+                       Margin="20,0,0,0"
+                       FontFamily="mat"/>
+
+                <renderer:CustomEntry Placeholder="Search for a show, movie, genre, etc."
+                                      PlaceholderColor="#707070"
+                                      Text="{Binding SearchQuery}"
+                                      ReturnCommand="{Binding SendRequest}"
+                                      ReturnCommandParameter="{Binding SearchQuery}"
+                                      FontFamily="Regular"
+                                      Visual="Default"
+                                      BackgroundColor="#323232"
+                                      VerticalOptions="CenterAndExpand"
+                                      HeightRequest="50"
+                                      TextColor="#707070"
+                                      FontSize="15"
+                                      HorizontalOptions="FillAndExpand"/>
+
+                <Label Text="{x:Static fonts:MaterialFilled.Mic}"
+                       TextColor="White"
+                       VerticalOptions="Center"
+                       FontSize="30"
+                       Margin="0,0,10,0"
+                       FontFamily="matf"/>
+            </StackLayout>
+        </Frame>
+        <Label Text="Top Searches"
+               FontFamily="Bold"
+               TextColor="White"
+               Margin="10,20"
+               FontSize="20"/>
+
+        <CollectionView ItemsSource="{Binding AllShows}"
+                        ItemSizingStrategy="MeasureAllItems"
+                        ItemTemplate="{StaticResource templateSelector}"
+                        ItemsLayout="{Binding ColViewLayout}">
+        </CollectionView>
+    </StackLayout>
+  
+</ContentPage>

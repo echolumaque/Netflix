@@ -101,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\Dependency\ToastDroid.cs" />
+    <Compile Include="Helpers\Renderers\CustomEntry.cs" />
     <Compile Include="Helpers\Renderers\CustomNavigationPageRenderer.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />

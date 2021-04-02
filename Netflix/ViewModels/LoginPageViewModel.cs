@@ -1,7 +1,5 @@
-﻿using System.Threading.Tasks;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Navigation;
-using Prism.Services.Dialogs;
 
 namespace Netflix.ViewModels
 {
@@ -13,10 +11,8 @@ namespace Netflix.ViewModels
         public LoginPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             this.navigationService = navigationService;
-            GotoHomePage = new DelegateCommand(async () => await HomePage());
+            GotoHomePage = new DelegateCommand(async () => await this.navigationService.NavigateAsync("/CustomNavigation/MainTabPage"));
 
         }
-
-        private async Task HomePage() => await navigationService.NavigateAsync("/MainTabPage");
     }
 }

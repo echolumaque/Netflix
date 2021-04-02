@@ -27,19 +27,12 @@
         </pages:ComingSoonPage.IconImageSource>
     </pages:ComingSoonPage>
 
-    <!--<ContentPage Title="Downloads">
+    <ContentPage Title="Downloads"
+                 BackgroundColor="Black">
         <ContentPage.IconImageSource>
-            <FontImageSource FontFamily="mat"
-                             Glyph="{x:Static fonts:Material.Download}"
+            <FontImageSource FontFamily="matf"
+                             Glyph="{x:Static fonts:MaterialFilled.File_download}"
                              Color="White"/>
         </ContentPage.IconImageSource>
     </ContentPage>
-
-    <ContentPage Title="More">
-        <ContentPage.IconImageSource>
-            <FontImageSource FontFamily="mat"
-                             Glyph="{x:Static fonts:Material.Menu}"
-                             Color="White"/>
-        </ContentPage.IconImageSource>
-    </ContentPage>-->
 </TabbedPage>

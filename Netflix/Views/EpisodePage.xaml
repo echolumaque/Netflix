@@ -8,6 +8,7 @@
              Visual="Material"
              xmlns:ffcached="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fonts="clr-namespace:Netflix.Helpers.Fonts"
+             NavigationPage.HasNavigationBar="False"
              x:Class="Netflix.Views.EpisodePage">
 
     <ScrollView>
@@ -85,8 +86,8 @@
                    BackgroundColor="#252525">
                 <StackLayout Orientation="Horizontal"
                              HorizontalOptions="CenterAndExpand">
-                    <Label Text="{x:Static fonts:Material.Download}"
-                           FontFamily="mat"
+                    <Label Text="{x:Static fonts:MaterialFilled.File_download}"
+                           FontFamily="matf"
                            VerticalOptions="Center"
                            FontSize="30"
                            TextColor="White"/>
@@ -132,6 +133,9 @@
                                   TextColor="Gray"/>
                         </FormattedString>
                     </Label.FormattedText>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddToListCommand}"/>
+                    </Label.GestureRecognizers>
                 </Label>
 
                 <Label Grid.Column="1"
