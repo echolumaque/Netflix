@@ -13,7 +13,7 @@ namespace Netflix.Views
         protected override bool OnBackButtonPressed()
         {
             var vm = (EpisodePageViewModel)BindingContext;
-            vm.navigationService.NavigateAsync("/CustomNavigation/MainTabPage");
+            vm.navigationService.NavigateAsync("/CustomNavigation/MainTabPage?createTab=HomePage&createTab=ComingSoonPage&createTab=DownloadPage");
             return base.OnBackButtonPressed();
         }
     }

@@ -11,7 +11,7 @@ namespace Netflix.ViewModels
         public LoginPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             this.navigationService = navigationService;
-            GotoHomePage = new DelegateCommand(async () => await this.navigationService.NavigateAsync("/CustomNavigation/MainTabPage"));
+            GotoHomePage = new DelegateCommand(async () => await this.navigationService.NavigateAsync("/CustomNavigation/MainTabPage?createTab=HomePage&createTab=ComingSoonPage&createTab=DownloadPage"));
 
         }
     }

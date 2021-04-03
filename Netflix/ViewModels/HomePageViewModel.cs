@@ -18,6 +18,7 @@ namespace Netflix.ViewModels
         public DelegateCommand GotoSearchPageCommand { get; }
         public DelegateCommand GotoMyListPage { get; }
         public DelegateCommand AddtoListCommand { get; }
+        public DelegateCommand GotoProfilePage { get; }
 
         public HomePageViewModel(INavigationService navigationService, IDialogService dialogService, IToast toast) : base(navigationService)
         {
@@ -27,10 +28,10 @@ namespace Netflix.ViewModels
             ShowInfo = new DelegateCommand(async () => await ShowPopup());
             GotoSearchPageCommand = new DelegateCommand(async  () => await this.navigationService.NavigateAsync("SearchPage"));
             GotoMyListPage = new DelegateCommand(async () => await this.navigationService.NavigateAsync("MyListPage"));
-            AddtoListCommand = new DelegateCommand(async () => await AddtoList());
+            GotoProfilePage = new DelegateCommand(async () => await this.navigationService.NavigateAsync("ProfilePage"));
         }
 
-        public override async void Initialize(INavigationParameters parameters)
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             var featuredShow = await API.GetFeaturedShow();
 

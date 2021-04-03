@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffcached="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fonts="clr-namespace:Netflix.Helpers.Fonts"
+             xmlns:images="clr-namespace:Netflix.Helpers.Images"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Visual="Material"
+             BackgroundColor="Black"
+             Title="Profiles &amp; More"
+             Padding="0,60,0,0"
+             xmlns:renderer="clr-namespace:Netflix.Helpers.Renderers"
+             xmlns:transformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="Netflix.Views.ProfilePage">
+    <ScrollView>
+        <StackLayout HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand">
+
+            <Grid RowDefinitions="70,Auto"
+                  ColumnSpacing="20"
+                  ColumnDefinitions="Auto,Auto,Auto">
+
+                <ffcached:CachedImage Source="{images:ImageResource Netflix.Helpers.Images.smile.png}"
+                                      BitmapOptimizations="True"
+                                      DownsampleToViewSize="True"
+                                      HorizontalOptions="Center"
+                                      Grid.Column="0"
+                                      Grid.Row="0"/>
+
+                <ffcached:CachedImage Source="{images:ImageResource Netflix.Helpers.Images.smile1.png}"
+                                      BitmapOptimizations="True"
+                                      DownsampleToViewSize="True"
+                                      Grid.Column="1"
+                                      HorizontalOptions="Center"
+                                      Grid.Row="0"/>
+
+                <Label Text="Watcher 1"
+                       TextColor="Gray"
+                       FontFamily="Regular"
+                       HorizontalOptions="Center"
+                       Grid.Column="0"
+                       Grid.Row="1"/>
+
+                <Label Text="Watcher 2"
+                       TextColor="Gray"
+                       FontFamily="Regular"
+                       HorizontalOptions="Center"
+                       Grid.Column="1"
+                       Grid.Row="1"/>
+
+                <Frame BackgroundColor="Transparent"
+                       HasShadow="False"
+                       Grid.Column="2"
+                       Grid.Row="0"
+                       HorizontalOptions="Center"
+                       Padding="0"
+                       WidthRequest="70"
+                       BorderColor="Gray">
+                    <Label Text="{x:Static fonts:Material.Add}"
+                           TextColor="Gray"
+                           VerticalOptions="Center"
+                           FontFamily="mat"
+                           FontSize="40"
+                           HorizontalOptions="Center"/>
+                </Frame>
+
+                <Label Text="Add Profile"
+                       TextColor="Gray"
+                       FontFamily="Regular"
+                       HorizontalOptions="Center"
+                       Grid.Column="2"
+                       Grid.Row="1"/>
+            </Grid>
+
+            <StackLayout Orientation="Horizontal"
+                         Margin="0,20"
+                         HorizontalOptions="CenterAndExpand">
+                <Label Text="{x:Static fonts:MaterialFilled.Create}"
+                       FontFamily="matf"
+                       VerticalTextAlignment="Center"
+                       TextColor="Gray"
+                       FontSize="20"/>
+
+                <Label Text="Manage Profiles"
+                       FontFamily="Regular"
+                       FontSize="17"
+                       VerticalTextAlignment="Center"
+                       TextColor="Gray"/>
+            </StackLayout>
+
+            <Frame BackgroundColor="#191919"
+                   Padding="10"
+                   HorizontalOptions="FillAndExpand">
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal"
+                                 Margin="0,10">
+                        <Label Text="{x:Static fonts:Material.Chat}"
+                               FontFamily="mat"
+                               FontSize="30"
+                               TextColor="White"
+                               VerticalTextAlignment="Center"/>
+                        <Label Text="Tell your friends about Netflix."
+                               TextColor="White"
+                               VerticalTextAlignment="Center"
+                               FontSize="18"
+                               FontFamily="Bold"/>
+                    </StackLayout>
+
+                    <Label Text="Share this link so your friends can join the conversation around all your favorite TV shows and movies."
+                           TextColor="White"
+                           FontSize="15"
+                           FontFamily="Regular"/>
+
+                    <Label Text="Terms &amp; Conditions"
+                           TextColor="Gray"
+                           Margin="0,10"
+                           TextDecorations="Underline"/>
+
+                    <Frame BackgroundColor="Black"
+                           HasShadow="False"
+                           Padding="5,10">
+                        <Grid ColumnDefinitions="Auto,120">
+                            <renderer:CustomEntry Text="https://www.netflix.com.ph/n/dfpogurjepo-sadjs-asaw"
+                                                  TextColor="White"
+                                                  IsReadOnly="True"
+                                                  BackgroundColor="Black"
+                                                  FontSize="15"
+                                                  Grid.Column="0"
+                                                  VerticalOptions="Center"
+                                                  HorizontalOptions="FillAndExpand"/>
+                            <Button BackgroundColor="White"
+                                    Text="Copy Link"
+                                    Grid.Column="1"
+                                    TextColor="Black"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Center"
+                                    FontFamily="Regular"/>
+                        </Grid>
+                    </Frame>
+
+                    <Grid ColumnDefinitions="*,*,*,*"
+                          Margin="0,10"
+                          RowDefinitions="Auto,Auto">
+                        <ffcached:CachedImage Source="{images:ImageResource Netflix.Helpers.Images.messenger.png}"
+                                              BitmapOptimizations="True"
+                                              DownsampleToViewSize="True"
+                                              VerticalOptions="Center"
+                                              HorizontalOptions="Center"
+                                              Grid.Column="0"
+                                              HeightRequest="30"
+                                              Grid.Row="0">
+                            <ffcached:CachedImage.Transformations>
+                                <transformation:CornersTransformation CornersTransformType="AllRounded"/>
+                            </ffcached:CachedImage.Transformations>
+                        </ffcached:CachedImage>
+
+                        <Label Text="Messenger"
+                               TextColor="White"
+                               FontFamily="Regular"
+                               Grid.Column="0"
+                               HorizontalOptions="Center"
+                               Grid.Row="1"/>
+
+                        <ffcached:CachedImage Source="{images:ImageResource Netflix.Helpers.Images.fb.png}"
+                                              BitmapOptimizations="True"
+                                              DownsampleToViewSize="True"
+                                              VerticalOptions="Center"
+                                              HeightRequest="30"
+                                              HorizontalOptions="Center"
+                                              Grid.Column="1"
+                                              Grid.Row="0">
+                            <ffcached:CachedImage.Transformations>
+                                <transformation:CornersTransformation CornersTransformType="AllRounded"/>
+                            </ffcached:CachedImage.Transformations>
+                        </ffcached:CachedImage>
+
+                        <Label Text="Facebook"
+                               TextColor="White"
+                               FontFamily="Regular"
+                               Grid.Column="1"
+                               HorizontalOptions="Center"
+                               Grid.Row="1"/>
+
+                        <ffcached:CachedImage Source="{images:ImageResource Netflix.Helpers.Images.gmail.png}"
+                                              BitmapOptimizations="True"
+                                              DownsampleToViewSize="True"
+                                              VerticalOptions="Center"
+                                              HorizontalOptions="Center"
+                                              Grid.Column="2"
+                                              HeightRequest="30"
+                                              Grid.Row="0">
+                            <ffcached:CachedImage.Transformations>
+                                <transformation:CornersTransformation CornersTransformType="AllRounded"/>
+                            </ffcached:CachedImage.Transformations>
+                        </ffcached:CachedImage>
+
+                        <Label Text="Gmail"
+                               TextColor="White"
+                               FontFamily="Regular"
+                               Grid.Column="2"
+                               HorizontalOptions="Center"
+                               Grid.Row="1"/>
+
+                        <Label Text="{x:Static fonts:Material.More_horiz}"
+                               FontFamily="mat"
+                               HorizontalOptions="Center"
+                               FontSize="30"
+                               TextColor="White"
+                               Grid.Column="3"
+                               Grid.Row="0"/>
+
+                        <Label Text="More"
+                               Grid.Column="3"
+                               Grid.Row="1"
+                               TextColor="White"
+                               HorizontalOptions="Center"
+                               FontFamily="Regular"/>
+
+                        <BoxView Color="#2F302F"
+                                 Grid.Column="0"
+                                 Grid.RowSpan="2"
+                                 VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="End"
+                                 WidthRequest="1"/>
+
+                        <BoxView Color="#2F302F"
+                                 Grid.Column="1"
+                                 Grid.RowSpan="2"
+                                 VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="End"
+                                 WidthRequest="1"/>
+
+                        <BoxView Color="#2F302F"
+                                 Grid.Column="2"
+                                 Grid.RowSpan="2"
+                                 VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="End"
+                                 WidthRequest="1"/>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+
+            <StackLayout Orientation="Horizontal"
+                         Margin="10">
+                <Label Text="{x:Static fonts:Material.Check}"
+                       FontFamily="mat"
+                       FontSize="20"
+                       VerticalTextAlignment="Center"
+                       TextColor="Gray"/>
+                <Label Text="My List"
+                       FontSize="16"
+                       TextColor="Gray"
+                       VerticalTextAlignment="Center"/>
+            </StackLayout>
+
+            <BoxView BackgroundColor="#2F302F"
+                     HorizontalOptions="FillAndExpand"
+                     HeightRequest="1"/>
+
+            <Label Text="App Settings"
+                   TextColor="Gray"
+                   FontFamily="Regular"
+                   FontSize="16"
+                   Margin="10"/>
+
+            <Label Text="Account"
+                   TextColor="Gray"
+                   FontFamily="Regular"
+                   FontSize="16"
+                   Margin="10"/>
+
+            <Label Text="Help"
+                   TextColor="Gray"
+                   FontFamily="Regular"
+                   FontSize="16"
+                   Margin="10"/>
+
+            <Label Text="Sign Out"
+                   TextColor="Gray"
+                   FontFamily="Regular"
+                   FontSize="16"
+                   Margin="10"/>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

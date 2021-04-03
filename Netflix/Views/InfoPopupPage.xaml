@@ -5,16 +5,17 @@
       prism:ViewModelLocator.AutowireViewModel="True"
       x:Class="Netflix.Views.InfoPopupPage"
       prism:DialogLayout.UseMask="False"
-      prism:DialogLayout.LayoutBounds="1, 0.95, -1, -1"
+      prism:DialogLayout.LayoutBounds="1, 1, -1, 1"
       BackgroundColor="#2A2A2A"
       prism:DialogLayout.RelativeWidthRequest="1.0"
       xmlns:ffcached="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
       xmlns:fonts="clr-namespace:Netflix.Helpers.Fonts"
       RowDefinitions="150,Auto,0.5,Auto"
-      Padding="10"
-      HeightRequest="280"
+      Padding="10,10,10,0"
+      HeightRequest="320" 
       prism:DialogLayout.CloseOnBackgroundTapped="True"
       ColumnDefinitions="120,Auto,*">
+    <!--height request to be remove when publishing-->
 
     <ffcached:CachedImage Source="{Binding Thumbnail}"
                           BitmapOptimizations="True"
@@ -124,8 +125,10 @@
              Grid.Row="2"
              Grid.Column="0"
              Grid.ColumnSpan="3"
-             VerticalOptions="StartAndExpand"
+             VerticalOptions="FillAndExpand"
              HorizontalOptions="FillAndExpand"/>
+    
+    
 
     <StackLayout Grid.Row="3"
                  Grid.Column="0"

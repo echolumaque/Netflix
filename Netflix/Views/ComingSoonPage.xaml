@@ -7,7 +7,14 @@
              Padding="0,40,0,0"
              xmlns:ffcached="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fonts="clr-namespace:Netflix.Helpers.Fonts"
+             Title="Coming Soon"
              x:Class="Netflix.Views.ComingSoonPage">
+
+    <ContentPage.IconImageSource>
+        <FontImageSource FontFamily="matf"
+                         Glyph="{x:Static fonts:MaterialFilled.Video_library}"
+                         Color="White"/>
+    </ContentPage.IconImageSource>
 
     <StackLayout>
         <StackLayout Orientation="Horizontal"

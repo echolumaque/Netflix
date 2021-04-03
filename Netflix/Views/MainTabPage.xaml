@@ -10,7 +10,7 @@
             xmlns:pages="clr-namespace:Netflix.Views"
             x:Class="Netflix.Views.MainTabPage">
 
-    <pages:HomePage Title="Home">
+    <!--<pages:HomePage Title="Home">
         <pages:HomePage.IconImageSource>
             <FontImageSource FontFamily="matf"
                              Glyph="{x:Static fonts:MaterialFilled.Home}"
@@ -27,12 +27,11 @@
         </pages:ComingSoonPage.IconImageSource>
     </pages:ComingSoonPage>
 
-    <ContentPage Title="Downloads"
-                 BackgroundColor="Black">
+    <pages:DownloadPage Title="Downloads">
         <ContentPage.IconImageSource>
             <FontImageSource FontFamily="matf"
                              Glyph="{x:Static fonts:MaterialFilled.File_download}"
                              Color="White"/>
         </ContentPage.IconImageSource>
-    </ContentPage>
+    </pages:DownloadPage>-->
 </TabbedPage>

@@ -14,10 +14,27 @@
     <ScrollView>
         <StackLayout Spacing="10">
 
-            <ffcached:CachedImage Source="{Binding InfoThumbnail}"
-                                  BitmapOptimizations="True"
-                                  DownsampleToViewSize="True"
-                                  HorizontalOptions="FillAndExpand"/>
+            <Grid>
+                <ffcached:CachedImage Source="{Binding InfoThumbnail}"
+                                      BitmapOptimizations="True"
+                                      DownsampleToViewSize="True"
+                                      HorizontalOptions="FillAndExpand"/>
+
+                <BoxView Color="#636365"
+                         HorizontalOptions="CenterAndExpand"
+                         VerticalOptions="CenterAndExpand"
+                         Opacity="0.55"
+                         WidthRequest="30"
+                         HeightRequest="30"/>
+
+                <Label Text="{x:Static fonts:MaterialFilled.Play_circle_outline}"
+                       FontFamily="matf"
+                       TextColor="White"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       FontSize="50"/>
+            </Grid>
+
 
             <Label Text="{Binding TitleOfShow}"
                    FontFamily="Bold"
@@ -197,10 +214,25 @@
                     <DataTemplate>
                         <Grid ColumnDefinitions="150,*,Auto"
                               Margin="0,10">
-                            <ffcached:CachedImage Source="{Binding InfoThumbnail}"
-                                                  BitmapOptimizations="True"
-                                                  DownsampleToViewSize="True"
-                                                  Grid.Column="0"/>
+                            <Grid Grid.Column="0">
+                                <ffcached:CachedImage Source="{Binding InfoThumbnail}"
+                                                      BitmapOptimizations="True"
+                                                      DownsampleToViewSize="True"/>
+
+                                <BoxView Color="#636365"
+                                         HorizontalOptions="CenterAndExpand"
+                                         VerticalOptions="CenterAndExpand"
+                                         Opacity="0.55"
+                                         WidthRequest="20"
+                                         HeightRequest="20"/>
+
+                                <Label Text="{x:Static fonts:MaterialFilled.Play_circle_outline}"
+                                       FontFamily="matf"
+                                       TextColor="White"
+                                       VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="CenterAndExpand"
+                                       FontSize="30"/>
+                            </Grid>
 
                             <StackLayout Grid.Column="1"
                                          Margin="10,0">

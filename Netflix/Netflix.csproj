@@ -13,6 +13,10 @@
     <None Remove="Helpers\Fonts\MaterialIconsOutlined-Regular.otf" />
     <None Remove="Helpers\Fonts\Roboto-Bold.ttf" />
     <None Remove="Helpers\Fonts\Roboto-Regular.ttf" />
+    <None Remove="Helpers\Images\9.jpg" />
+    <None Remove="Helpers\Images\fb.png" />
+    <None Remove="Helpers\Images\gmail.png" />
+    <None Remove="Helpers\Images\messenger.png" />
     <None Remove="Helpers\Images\n.png" />
     <None Remove="Helpers\Images\netflix.png" />
     <None Remove="Helpers\Images\smile.png" />
@@ -24,6 +28,10 @@
     <EmbeddedResource Include="Helpers\Fonts\MaterialIconsOutlined-Regular.otf" />
     <EmbeddedResource Include="Helpers\Fonts\Roboto-Bold.ttf" />
     <EmbeddedResource Include="Helpers\Fonts\Roboto-Regular.ttf" />
+    <EmbeddedResource Include="Helpers\Images\9.jpg" />
+    <EmbeddedResource Include="Helpers\Images\fb.png" />
+    <EmbeddedResource Include="Helpers\Images\gmail.png" />
+    <EmbeddedResource Include="Helpers\Images\messenger.png" />
     <EmbeddedResource Include="Helpers\Images\n.png" />
     <EmbeddedResource Include="Helpers\Images\netflix.png" />
     <EmbeddedResource Include="Helpers\Images\smile.png" />
@@ -50,6 +58,9 @@
     <EmbeddedResource Update="Views\ComingSoonPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\DownloadPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\EpisodePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -66,6 +77,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MyListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ProfilePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\SearchPage.xaml">

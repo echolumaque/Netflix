@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Visual="Material"
+             BackgroundColor="Black"
+             Padding="0,40,0,0"
+             xmlns:ffcached="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fonts="clr-namespace:Netflix.Helpers.Fonts"
+             xmlns:images="clr-namespace:Netflix.Helpers.Images"
+             Title="Downloads"
+             x:Class="Netflix.Views.DownloadPage">
+
+    <ContentPage.IconImageSource>
+        <FontImageSource FontFamily="matf"
+                         Glyph="{x:Static fonts:MaterialFilled.File_download}"
+                         Color="White"/>
+    </ContentPage.IconImageSource>
+
+    <StackLayout Margin="0,20,0,0">
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{x:Static fonts:MaterialFilled.Settings}"
+                   TextColor="Gray"
+                   VerticalOptions="Center"
+                   FontSize="25"
+                   FontFamily="matf"/>
+            <Label Text="Smart Downloads"
+                   TextColor="Gray"
+                   VerticalTextAlignment="Center"
+                   FontFamily="Regular"/>
+        </StackLayout>
+
+        <Label Text="Introducing Downloads for You"
+               FontFamily="Bold"
+               FontSize="25"
+               Margin="0,50,0,0"
+               TextColor="White"/>
+
+        <Label Text="We'll download a personalized selection of movies and shows for you, so there's always something to watch on your phone."
+               TextColor="Gray"
+               FontFamily="Regular"/>
+
+        <ffcached:CachedImage Source="{images:ImageResource Netflix.Helpers.Images.9.jpg}"
+                              BitmapOptimizations="True"
+                              DownsampleToViewSize="True"
+                              HeightRequest="300"
+                              HorizontalOptions="Center"/>
+
+        <Button Text="Set up"
+                TextColor="White"
+                BackgroundColor="#0071EB"
+                HorizontalOptions="FillAndExpand"/>
+
+        <Button Text="Find something to download"
+                TextColor="White"
+                BackgroundColor="#252525"
+                FontFamily="Bold"
+                Margin="0,60"
+                Command="{Binding GotoHomePage}"
+                HorizontalOptions="Center"/>
+    </StackLayout>
+  
+</ContentPage>

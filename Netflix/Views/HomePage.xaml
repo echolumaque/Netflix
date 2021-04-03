@@ -9,17 +9,24 @@
              xmlns:images="clr-namespace:Netflix.Helpers.Images" 
              xmlns:transformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              BackgroundColor="Black"
+             Title="Home Page"
              x:Class="Netflix.Views.HomePage">
+    
+    <ContentPage.IconImageSource>
+        <FontImageSource FontFamily="matf"
+                         Glyph="{x:Static fonts:MaterialFilled.Home}"
+                         Color="White"/>
+    </ContentPage.IconImageSource>
     
     <ScrollView>
         <StackLayout>
             <Grid RowDefinitions="*,Auto,*"
-                  HeightRequest="600">
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand">
                 <ffcached:CachedImage Source="{Binding Thumbnail}"
                                       Grid.Row="0"
                                       Opacity="0.2"
                                       Grid.RowSpan="3"
-                                      VerticalOptions="FillAndExpand"
                                       HorizontalOptions="FillAndExpand"
                                       BitmapOptimizations="True"
                                       DownsampleToViewSize="True"/>
@@ -63,7 +70,11 @@
                         <ffcached:CachedImage Source="{images:ImageResource Netflix.Helpers.Images.smile.png}"
                                               BitmapOptimizations="True"
                                               HeightRequest="30"
-                                              DownsampleToViewSize="True"/>
+                                              DownsampleToViewSize="True">
+                            <ffcached:CachedImage.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GotoProfilePage}"/>
+                            </ffcached:CachedImage.GestureRecognizers>
+                        </ffcached:CachedImage>
                     </StackLayout>
 
                     <Label Text="TV Shows"
@@ -99,6 +110,7 @@
                       VerticalOptions="End"
                       RowDefinitions="*,*"
                       RowSpacing="10"
+                      Margin="0,0,0,20"
                       ColumnDefinitions="*,*,*">
 
                     <Label Text="{Binding Genres}"
@@ -106,7 +118,7 @@
                            TextColor="White"
                            VerticalOptions="End"
                            HorizontalTextAlignment="Center"
-                           FontSize="16"
+                           FontSize="15"
                            Margin="10,0,0,0"
                            Grid.Row="0"
                            Grid.Column="0"

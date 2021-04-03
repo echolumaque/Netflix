@@ -52,6 +52,8 @@ namespace Netflix
             containerRegistry.RegisterForNavigation<ComingSoonPage, ComingSoonPageViewModel>();
             containerRegistry.RegisterForNavigation<SearchPage, SearchPageViewModel>();
             containerRegistry.RegisterForNavigation<MyListPage, MyListPageViewModel>();
+            containerRegistry.RegisterForNavigation<DownloadPage, DownloadPageViewModel>();
+            containerRegistry.RegisterForNavigation<ProfilePage, ProfilePageViewModel>();
         }
 
         public static HttpClient LocalAPI = new(new HttpClientHandler {AutomaticDecompression = DecompressionMethods.Deflate} )
