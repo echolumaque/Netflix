@@ -13,12 +13,14 @@ namespace Netflix.ViewModels
     {
         private INavigationService navigationService;
         private IDialogService dialogService;
+        public DelegateCommand ProfilePageCommand { get; }
         public DelegateCommand<string> SendRequest { get; }
         public SearchPageViewModel(INavigationService navigationService, IDialogService dialogService) : base(navigationService)
         {
             this.navigationService = navigationService;
             this.dialogService = dialogService;
             SendRequest = new DelegateCommand<string>(async (show) => await SearchForShows(show));
+            ProfilePageCommand = new DelegateCommand(async () => await this.navigationService.NavigateAsync("ProfilePage"));
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
@@ -38,11 +40,19 @@ namespace Netflix.ViewModels
             {
                 AllShows[i].ShowInfoCommand = new DelegateCommand<MovieModel>(async (show) => await ShowPopup(show));
             }
+            IsSearchVisible = false;
         }
 
         public override void OnNavigatedFrom(INavigationParameters parameters) => Preferences.Set("search", string.Empty);
 
         #region Properties
+
+        private bool isSearchVisible;
+        public bool IsSearchVisible
+        {
+            get { return isSearchVisible; }
+            set { SetProperty(ref isSearchVisible, value); }
+        }
         private ObservableCollection<MovieModel> allShows;
         public ObservableCollection<MovieModel> AllShows
         {

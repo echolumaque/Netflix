@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fonts="clr-namespace:Netflix.Helpers.Fonts"
+             xmlns:transformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="Netflix.Views.NetflixNavigation">
+   
+  <ContentView.Content>
+      <StackLayout Orientation="Horizontal"
+                   HorizontalOptions="FillAndExpand">
+            <Label Text="{Binding PageTitle}"
+                   FontFamily="Bold"
+                   VerticalTextAlignment="Center"
+                   FontSize="25"
+                   HorizontalOptions="Start"
+                   TextColor="White"/>
+
+            <Label Text="{x:Static fonts:Material.Search}"
+                   FontFamily="mat"
+                   FontSize="30"
+                   Margin="10,0"
+                   TextColor="White"
+                   VerticalTextAlignment="Center"
+                   IsVisible="{Binding IsSearchVisible}"
+                   HorizontalOptions="{Binding SearchHorizontal}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SearchCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <ffimage:CachedImage Source="{Binding ProfilePic}"
+                                 HeightRequest="30"
+                                 BitmapOptimizations="True"
+                                 DownsampleToViewSize="True"
+                                 HorizontalOptions="{Binding DPHorizontal}"
+                                 Margin="10,0"
+                                 VerticalOptions="Center">
+                <ffimage:CachedImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ProfilePicCommand}"/>
+                </ffimage:CachedImage.GestureRecognizers>
+                <ffimage:CachedImage.Transformations>
+                    <transformation:CornersTransformation CornersTransformType="AllRounded"/>
+                </ffimage:CachedImage.Transformations>
+            </ffimage:CachedImage>
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

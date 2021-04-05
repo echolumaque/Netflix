@@ -14,10 +14,14 @@ namespace Netflix.ViewModels
     {
         private INavigationService navigationService;
         public DelegateCommand GotoHomePage { get; }
+        public DelegateCommand SearchCommand { get; }
+        public DelegateCommand ProfilePageCommand { get; }
         public DownloadPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             this.navigationService = navigationService;
             GotoHomePage = new DelegateCommand(async () => await this.navigationService.SelectTabAsync("HomePage"));
+            SearchCommand = new DelegateCommand(async () => await this.navigationService.NavigateAsync("SearchPage"));
+            ProfilePageCommand = new DelegateCommand(async () => await this.navigationService.NavigateAsync("ProfilePage"));
         }
     }
 }

@@ -9,7 +9,7 @@
              xmlns:images="clr-namespace:Netflix.Helpers.Images" 
              xmlns:transformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              BackgroundColor="Black"
-             Title="Home Page"
+             Title="Home"
              x:Class="Netflix.Views.HomePage">
     
     <ContentPage.IconImageSource>
@@ -74,6 +74,9 @@
                             <ffcached:CachedImage.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding GotoProfilePage}"/>
                             </ffcached:CachedImage.GestureRecognizers>
+                            <ffcached:CachedImage.Transformations>
+                                <transformation:CornersTransformation CornersTransformType="AllRounded"/>
+                            </ffcached:CachedImage.Transformations>
                         </ffcached:CachedImage>
                     </StackLayout>
 
@@ -149,9 +152,10 @@
 
                     <Frame BackgroundColor="White"
                            Grid.Row="1"
-                           Padding="0,0"
+                           Padding="0,5"
+                           Margin="10,0"
                            VerticalOptions="Center"
-                           CornerRadius="10"
+                           CornerRadius="5"
                            Grid.Column="1">
                         <StackLayout Orientation="Horizontal"
                                      VerticalOptions="Center"
