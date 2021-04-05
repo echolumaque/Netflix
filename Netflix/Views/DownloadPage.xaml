@@ -10,7 +10,9 @@
              xmlns:fonts="clr-namespace:Netflix.Helpers.Fonts"
              xmlns:images="clr-namespace:Netflix.Helpers.Images"
              Title="Downloads"
+             xmlns:views="clr-namespace:Netflix.Views"
              x:Class="Netflix.Views.DownloadPage">
+
 
     <ContentPage.IconImageSource>
         <FontImageSource FontFamily="matf"
@@ -18,8 +20,15 @@
                          Color="White"/>
     </ContentPage.IconImageSource>
 
-    <StackLayout Margin="0,20,0,0">
-        <StackLayout Orientation="Horizontal">
+    <StackLayout>
+
+        <views:NetflixNavigation PageTitle="Downloads"
+                                 ProfilePic="{images:ImageResource Netflix.Helpers.Images.smile.png}"
+                                 SearchCommand="{Binding SearchCommand}"
+                                 ProfilePicCommand="{Binding ProfilePageCommand}"/>
+
+        <StackLayout Orientation="Horizontal"
+                     Margin="0,20,0,0">
             <Label Text="{x:Static fonts:MaterialFilled.Settings}"
                    TextColor="Gray"
                    VerticalOptions="Center"

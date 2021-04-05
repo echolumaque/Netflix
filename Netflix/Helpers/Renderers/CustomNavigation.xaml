@@ -11,6 +11,4 @@
             <On Platform="Android, iOS" Value="Transparent" />
         </OnPlatform>
     </NavigationPage.BarBackgroundColor>
-
-
 </NavigationPage>
