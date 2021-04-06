@@ -11,10 +11,9 @@ namespace Netflix.ViewModels
     {
         private INavigationService navigationService;
         public DelegateCommand<MovieModel> ShowPopupCommand { get; }
-        public MyListPageViewModel(INavigationService navigationService, IDialogService dialogService) : base(navigationService)
+        public MyListPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             this.navigationService = navigationService;
-            this.dialogService = dialogService;
             ShowPopupCommand = new DelegateCommand<MovieModel>(async (show) => await ShowPopup(show));
         }
 

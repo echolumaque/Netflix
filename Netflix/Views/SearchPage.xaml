@@ -4,7 +4,7 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              BackgroundColor="Black"
-             Padding="0,40,0,0"
+             Padding="0,60,0,0"
              xmlns:ffcached="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fonts="clr-namespace:Netflix.Helpers.Fonts"
              xmlns:renderer="clr-namespace:Netflix.Helpers.Renderers"
@@ -12,6 +12,13 @@
              xmlns:views="clr-namespace:Netflix.Views"
              xmlns:images="clr-namespace:Netflix.Helpers.Images"
              x:Class="Netflix.Views.SearchPage">
+
+    <NavigationPage.TitleView>
+        <views:NetflixNavigation ProfilePic="{images:ImageResource Netflix.Helpers.Images.smile.png}"
+                                  ProfilePicCommand="{Binding ProfilePageCommand}"
+                                  IsSearchVisible="{Binding IsSearchVisible}"
+                                  DPHorizontal="EndAndExpand"/>
+    </NavigationPage.TitleView>
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -70,12 +77,6 @@
     </ContentPage.Resources>
 
     <StackLayout>
-
-        <views:NetflixNavigation ProfilePic="{images:ImageResource Netflix.Helpers.Images.smile.png}"
-                                 ProfilePicCommand="{Binding ProfilePageCommand}"
-                                 IsSearchVisible="{Binding IsSearchVisible}"
-                                 DPHorizontal="EndAndExpand"/>
-        
         <Frame BackgroundColor="#323232"
                Padding="0"
                HorizontalOptions="FillAndExpand">

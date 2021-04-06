@@ -5,7 +5,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              Visual="Material"
              BackgroundColor="Black"
-             Padding="0,40,0,0"
+             Padding="0,20,0,0"
              xmlns:ffcached="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fonts="clr-namespace:Netflix.Helpers.Fonts"
              xmlns:images="clr-namespace:Netflix.Helpers.Images"
