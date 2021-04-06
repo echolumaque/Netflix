@@ -22,12 +22,12 @@ namespace Netflix.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-
+            global::Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             Android.Glide.Forms.Init(this);
-
+        
             if (Build.VERSION.SdkInt <= BuildVersionCodes.Q)
             {
                 Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
@@ -84,6 +84,8 @@ namespace Netflix.Droid
             BaseContext.ApplicationContext.CreateConfigurationContext(configuration);
             BaseContext.Resources.DisplayMetrics.SetTo(metrics);
         }
+
+        public override void OnBackPressed() => Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed);
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {

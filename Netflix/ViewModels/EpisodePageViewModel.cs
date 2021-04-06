@@ -13,12 +13,17 @@ namespace Netflix.ViewModels
         public INavigationService navigationService;
         private IToast toast;
         public DelegateCommand AddToListCommand { get; }
+        public DelegateCommand SearchPageCommand { get; }
+        public DelegateCommand ProfilePageCommand { get; }
+
 
         public EpisodePageViewModel(INavigationService navigationService, IToast toast) : base(navigationService)
         {
             this.navigationService = navigationService;
             this.toast = toast;
             AddToListCommand = new DelegateCommand(async () => await AddtoList());
+            SearchPageCommand = new DelegateCommand(async () => await this.navigationService.NavigateAsync("SearchPage"));
+            ProfilePageCommand = new DelegateCommand(async () => await this.navigationService.NavigateAsync("ProfilePage"));
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)

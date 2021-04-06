@@ -19,6 +19,7 @@
                                          BitmapOptimizations="True"
                                          DownsampleToViewSize="True"
                                          Margin="3"
+                                         HeightRequest="180"
                                          WidthRequest="150">
                         <ffimage:CachedImage.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ShowInfoCommand}"
