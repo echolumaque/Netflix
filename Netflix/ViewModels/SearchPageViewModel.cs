@@ -12,13 +12,11 @@ namespace Netflix.ViewModels
     public class SearchPageViewModel : ViewModelBase
     {
         private INavigationService navigationService;
-        private IDialogService dialogService;
         public DelegateCommand ProfilePageCommand { get; }
         public DelegateCommand<string> SendRequest { get; }
-        public SearchPageViewModel(INavigationService navigationService, IDialogService dialogService) : base(navigationService)
+        public SearchPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             this.navigationService = navigationService;
-            this.dialogService = dialogService;
             SendRequest = new DelegateCommand<string>(async (show) => await SearchForShows(show));
             ProfilePageCommand = new DelegateCommand(async () => await this.navigationService.NavigateAsync("ProfilePage"));
         }
@@ -105,7 +103,7 @@ namespace Netflix.ViewModels
 
         private async Task ShowPopup(MovieModel movieModel)
         {
-            var parameters = new DialogParameters
+            var parameters = new NavigationParameters
             {
                 {
                     "show",
@@ -120,7 +118,7 @@ namespace Netflix.ViewModels
                     }
                 }
             };
-            await dialogService.ShowDialogAsync("InfoPopupPage", parameters);
+            await navigationService.NavigateAsync("InfoPopupPage", parameters);
         }
         #endregion
     }
