@@ -1,5 +1,4 @@
-﻿using Netflix.ViewModels;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Netflix.Views
 {
@@ -8,13 +7,6 @@ namespace Netflix.Views
         public EpisodePage()
         {
             InitializeComponent();
-        }
-
-        protected override bool OnBackButtonPressed()
-        {
-            var vm = (EpisodePageViewModel)BindingContext;
-            vm.navigationService.NavigateAsync("/CustomNavigation/MainTabPage?createTab=HomePage&createTab=ComingSoonPage&createTab=DownloadPage");
-            return base.OnBackButtonPressed();
         }
     }
 }

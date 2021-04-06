@@ -1,15 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Netflix.Models;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
-using Prism.Services.Dialogs;
-using Xamarin.Essentials;
 
 namespace Netflix.ViewModels
 {
-    public class InfoPopupPageViewModel : ViewModelBase, IDialogAware
+    public class InfoPopupPageViewModel : ViewModelBase
     {
         private INavigationService navigationService;
         public DelegateCommand CloseCommand { get; }
@@ -18,19 +14,11 @@ namespace Netflix.ViewModels
         public InfoPopupPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             this.navigationService = navigationService;
-            CloseCommand = new DelegateCommand(() => RequestClose(null));
+            CloseCommand = new DelegateCommand(async () => await this.navigationService.ClearPopupStackAsync());
             EpisodePageCommand = new DelegateCommand(async () => await GotoEpisodePage());
         }
 
-        public event Action<IDialogParameters> RequestClose;
-
-        public bool CanCloseDialog() => true;
-
-        public void OnDialogClosed()
-        {
-        }
-
-        public void OnDialogOpened(IDialogParameters parameters)
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
             InfoThumbnail = parameters.GetValue<MovieModel>("show").InfoThumbnail;
             Year = parameters.GetValue<MovieModel>("show").Year;
@@ -105,7 +93,7 @@ namespace Netflix.ViewModels
                     }
                 }
             };
-            RequestClose(null);
+            await navigationService.ClearPopupStackAsync();
             await navigationService.NavigateAsync("EpisodePage", parameters);
         }
         #endregion

@@ -40,6 +40,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Prism.Plugin.Popups" Version="8.0.31-beta" />
     <PackageReference Include="Refit" Version="6.0.38" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="Syncfusion.Xamarin.SfRating" Version="18.4.0.49" />

@@ -29,6 +29,7 @@ namespace Netflix.ViewModels
             GotoSearchPageCommand = new DelegateCommand(async  () => await this.navigationService.NavigateAsync("SearchPage"));
             GotoMyListPage = new DelegateCommand(async () => await this.navigationService.NavigateAsync("MyListPage"));
             GotoProfilePage = new DelegateCommand(async () => await this.navigationService.NavigateAsync("ProfilePage"));
+            AddtoListCommand = new DelegateCommand(async () => await AddtoList());
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
@@ -164,7 +165,7 @@ namespace Netflix.ViewModels
 
         private async Task ShowPopup()
         {
-            var parameters = new DialogParameters
+            var parameters = new NavigationParameters
             {
                 {
                     "show",
@@ -179,13 +180,12 @@ namespace Netflix.ViewModels
                     }
                 }
             };
-
-            await dialogService.ShowDialogAsync("InfoPopupPage", parameters);
+            await navigationService.NavigateAsync("InfoPopupPage", parameters);
         }
 
         private async Task ShowPopup(MovieModel movieModel)
         {
-            var parameters = new DialogParameters
+            var parameters = new NavigationParameters
             {
                 {
                     "show",
@@ -200,8 +200,7 @@ namespace Netflix.ViewModels
                     }
                 }
             };
-
-            await dialogService.ShowDialogAsync("InfoPopupPage", parameters);
+            await navigationService.NavigateAsync("InfoPopupPage", parameters);
         }
 
         private async Task AddtoList()

@@ -9,6 +9,7 @@ using Netflix.ViewModels;
 using Netflix.Views;
 using Prism;
 using Prism.Ioc;
+using Prism.Plugin.Popups;
 using SQLite;
 using Xamarin.Essentials;
 using Xamarin.Essentials.Implementation;
@@ -40,6 +41,7 @@ namespace Netflix
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterPopupNavigationService();
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
             containerRegistry.RegisterForNavigation<CustomNavigation>();
@@ -47,7 +49,7 @@ namespace Netflix
 
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
-            containerRegistry.RegisterDialog<InfoPopupPage, InfoPopupPageViewModel>();
+            containerRegistry.RegisterForNavigation<InfoPopupPage, InfoPopupPageViewModel>();
             containerRegistry.RegisterForNavigation<EpisodePage, EpisodePageViewModel>();
             containerRegistry.RegisterForNavigation<ComingSoonPage, ComingSoonPageViewModel>();
             containerRegistry.RegisterForNavigation<SearchPage, SearchPageViewModel>();
