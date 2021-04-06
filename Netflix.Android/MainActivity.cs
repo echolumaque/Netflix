@@ -27,31 +27,46 @@ namespace Netflix.Droid
             global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             Android.Glide.Forms.Init(this);
-        
-            if (Build.VERSION.SdkInt <= BuildVersionCodes.Q)
-            {
-                Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
-                Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
-                Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
-                Window.AddFlags(WindowManagerFlags.LayoutInOverscan);
-                Window.ClearFlags(WindowManagerFlags.Fullscreen);
-            }
-            else if (Build.VERSION.SdkInt == BuildVersionCodes.R || Build.VERSION.SdkInt != BuildVersionCodes.R)
+
+            //if (Build.VERSION.SdkInt <= BuildVersionCodes.Q)
+            //{
+            //    Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
+            //    Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
+            //    Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
+            //    Window.AddFlags(WindowManagerFlags.LayoutInOverscan);
+            //    Window.ClearFlags(WindowManagerFlags.Fullscreen);
+            //}
+            //else if (Build.VERSION.SdkInt == BuildVersionCodes.R || Build.VERSION.SdkInt != BuildVersionCodes.R)
+            //{
+            //    Window.SetStatusBarColor(Color.Transparent);
+            //    Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
+            //    Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
+            //    Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+            //    Window.AddFlags(WindowManagerFlags.LayoutInScreen);
+            //    Window.ClearFlags(WindowManagerFlags.Fullscreen);
+            //    Window.SetDecorFitsSystemWindows(false);
+            //}
+            //else
+            //{
+            //    Window.SetStatusBarColor(Color.Transparent);
+            //    Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.Never;
+            //    Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+            //    Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
+            //    Window.AddFlags(WindowManagerFlags.LayoutInScreen);
+            //    Window.ClearFlags(WindowManagerFlags.Fullscreen);
+            //}
+
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.P)
             {
                 Window.SetStatusBarColor(Color.Transparent);
                 Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
-                Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
-                Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-                Window.AddFlags(WindowManagerFlags.LayoutInScreen);
-                Window.ClearFlags(WindowManagerFlags.Fullscreen);
-                Window.SetDecorFitsSystemWindows(false);
+                Window.AddFlags(WindowManagerFlags.LayoutInOverscan);
+                Window.AddFlags(WindowManagerFlags.Fullscreen);
             }
             else
             {
                 Window.SetStatusBarColor(Color.Transparent);
                 Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.Never;
-                Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-                Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
                 Window.AddFlags(WindowManagerFlags.LayoutInScreen);
                 Window.ClearFlags(WindowManagerFlags.Fullscreen);
             }
@@ -59,8 +74,7 @@ namespace Netflix.Droid
 
             LoadApplication(new App(new AndroidInitializer()));
         }
-
-
+       
         public override Resources Resources
         {
             get
@@ -93,6 +107,8 @@ namespace Netflix.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
+       
     }
 
     public class AndroidInitializer : IPlatformInitializer
