@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Netflix.Models;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services.Dialogs;
 
@@ -14,7 +10,6 @@ namespace Netflix.ViewModels
     public class MyListPageViewModel : ViewModelBase
     {
         private INavigationService navigationService;
-        private IDialogService dialogService;
         public DelegateCommand<MovieModel> ShowPopupCommand { get; }
         public MyListPageViewModel(INavigationService navigationService, IDialogService dialogService) : base(navigationService)
         {
@@ -49,7 +44,7 @@ namespace Netflix.ViewModels
 
         private async Task ShowPopup(MovieModel movieModel)
         {
-            var parameters = new DialogParameters
+            var parameters = new NavigationParameters
             {
                 {
                     "show",
@@ -64,7 +59,7 @@ namespace Netflix.ViewModels
                     }
                 }
             };
-            await dialogService.ShowDialogAsync("InfoPopupPage", parameters);
+            await navigationService.NavigateAsync("InfoPopupPage", parameters);
         }
 
         #endregion
