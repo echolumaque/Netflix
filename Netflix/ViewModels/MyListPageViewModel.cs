@@ -50,10 +50,6 @@ namespace Netflix.ViewModels
                     new MovieModel
                     {
                         Title = movieModel.Title,
-                        Year = movieModel.Year,
-                        Synopsis = movieModel.Synopsis,
-                        Casts = movieModel.Casts,
-                        InfoThumbnail = movieModel.InfoThumbnail,
                         Thumbnail = movieModel.Thumbnail
                     }
                 }

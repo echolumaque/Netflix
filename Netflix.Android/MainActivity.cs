@@ -5,8 +5,10 @@ using Android.Graphics;
 using Android.OS;
 using Android.Util;
 using Android.Views;
+using AndroidX.Core.View;
 using Netflix.Droid.Helpers.Dependency;
 using Netflix.Helpers.Dependency;
+using Plugin.CurrentActivity;
 using Prism;
 using Prism.Ioc;
 
@@ -27,54 +29,40 @@ namespace Netflix.Droid
             global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             Android.Glide.Forms.Init(this);
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
-            //if (Build.VERSION.SdkInt <= BuildVersionCodes.Q)
-            //{
-            //    Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
-            //    Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
-            //    Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
-            //    Window.AddFlags(WindowManagerFlags.LayoutInOverscan);
-            //    Window.ClearFlags(WindowManagerFlags.Fullscreen);
-            //}
-            //else if (Build.VERSION.SdkInt == BuildVersionCodes.R || Build.VERSION.SdkInt != BuildVersionCodes.R)
-            //{
-            //    Window.SetStatusBarColor(Color.Transparent);
-            //    Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
-            //    Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
-            //    Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-            //    Window.AddFlags(WindowManagerFlags.LayoutInScreen);
-            //    Window.ClearFlags(WindowManagerFlags.Fullscreen);
-            //    Window.SetDecorFitsSystemWindows(false);
-            //}
-            //else
-            //{
-            //    Window.SetStatusBarColor(Color.Transparent);
-            //    Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.Never;
-            //    Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-            //    Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
-            //    Window.AddFlags(WindowManagerFlags.LayoutInScreen);
-            //    Window.ClearFlags(WindowManagerFlags.Fullscreen);
-            //}
-
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.P)
+            if (Build.VERSION.SdkInt <= BuildVersionCodes.Q)
             {
                 Window.SetStatusBarColor(Color.Transparent);
                 Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
                 Window.AddFlags(WindowManagerFlags.LayoutInOverscan);
                 Window.AddFlags(WindowManagerFlags.Fullscreen);
             }
+            else if (Build.VERSION.SdkInt == BuildVersionCodes.R || Build.VERSION.SdkInt != BuildVersionCodes.R) //sakop yung navbar pero walang batt, wifi icons
+            {
+                Window.SetStatusBarColor(Color.Transparent);
+                Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
+                //Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
+                Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+                Window.AddFlags(WindowManagerFlags.LayoutInOverscan);
+                Window.AddFlags(WindowManagerFlags.Fullscreen);
+                Window.SetDecorFitsSystemWindows(false);
+            }
             else
             {
                 Window.SetStatusBarColor(Color.Transparent);
                 Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.Never;
+                Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+                Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
                 Window.AddFlags(WindowManagerFlags.LayoutInScreen);
                 Window.ClearFlags(WindowManagerFlags.Fullscreen);
             }
+
             InitFontScale();
 
             LoadApplication(new App(new AndroidInitializer()));
         }
-       
+
         public override Resources Resources
         {
             get
@@ -116,6 +104,7 @@ namespace Netflix.Droid
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<IToast, ToastDroid>();
+            containerRegistry.Register<IChangeWindow, ChangeWindow>();
         }
     }
 }

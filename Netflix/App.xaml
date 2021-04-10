@@ -5,8 +5,6 @@
                         xmlns:converter="clr-namespace:Netflix.Helpers.Converter"
                         x:Class="Netflix.App">
     <Application.Resources>
-
         <converter:ArrayToStringConverter x:Key="ArrayToString"/>
-
     </Application.Resources>
 </prism:PrismApplication>

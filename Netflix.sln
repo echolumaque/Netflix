@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netflix", "Netflix\Netflix.csproj", "{75CF0361-F92C-4BDC-A777-64ACD43C6FA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netflix", "Netflix\Netflix.csproj", "{75CF0361-F92C-4BDC-A777-64ACD43C6FA9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netflix.Android", "Netflix.Android\Netflix.Android.csproj", "{D5135CE3-572B-440D-A39A-2C9F8D06F8E1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netflix.iOS", "Netflix.iOS\Netflix.iOS.csproj", "{979146DA-8EEA-4521-9E04-41F83451362E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingGraphQL", "TestingGraphQL\TestingGraphQL.csproj", "{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,30 @@ Global
 		{979146DA-8EEA-4521-9E04-41F83451362E}.Release|iPhone.Build.0 = Release|iPhone
 		{979146DA-8EEA-4521-9E04-41F83451362E}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{979146DA-8EEA-4521-9E04-41F83451362E}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Ad-Hoc|Any CPU.ActiveCfg = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Ad-Hoc|Any CPU.Build.0 = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Release|iPhone.Build.0 = Release|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{66FD7A67-0300-4C3C-A45C-BB171A0E6C4F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
