@@ -1,27 +1,52 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
 using Prism.Commands;
 using SQLite;
 
 namespace Netflix.Models
 {
+    public class MovieDatas
+    {
+        [JsonProperty("allShows")]
+        public MovieModel[] AllMoviesModel { get; set; }
+
+        [JsonProperty("popularShows")]
+        public MovieModel[] PopularMoviesModel { get; set; }
+
+        [JsonProperty("actionShows")]
+        public MovieModel[] ActionMoviesModel { get; set; }
+
+        [JsonProperty("comedyShows")]
+        public MovieModel[] ComedyMoviesModel { get; set; }
+
+        [JsonProperty("comingSoonShows")]
+        public MovieModel[] ComingSoonMoviesModel { get; set; }
+
+        [JsonProperty("featuredShow")]
+        public MovieModel FeaturedMovieModel { get; set; }
+
+        [JsonProperty("searchForShow")]
+        public MovieModel SearchForShowModel { get; set; }
+
+        [JsonProperty("searchForShowList")]
+        public MovieModel[] SearchForShowList { get; set; }
+    }
+
     public class MovieModel
     {
-        [JsonProperty("Thumbnail")]
+        [JsonProperty("thumbnail")]
         public string Thumbnail { get; set; }
 
         [JsonProperty("Title")]
         public string Title { get; set; }
-    
+
         [JsonProperty("Genre")]
         [Ignore]
         public string[] Genre { get; set; }
-    
+
         [JsonProperty("IsFeatured")]
         public bool IsFeatured { get; set; }
-    
+
         [JsonProperty("Synopsis")]
         public string Synopsis { get; set; }
 
@@ -51,5 +76,7 @@ namespace Netflix.Models
         [JsonIgnore]
         [Ignore]
         public int EpisodeNumber { get; set; }
+
+      
     }
 }

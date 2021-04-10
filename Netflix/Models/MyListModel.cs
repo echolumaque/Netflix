@@ -9,7 +9,8 @@ namespace Netflix.Models
     public class MyListModel
     {
         public string Title { get; set; }
-        public string Image { get; set; }
+        public string Year { get; set; }
+        public string Thumbnail { get; set; }
         public string Casts { get; set; }
         public string Synopsis { get; set; }
         [Ignore]

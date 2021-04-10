@@ -4,7 +4,6 @@ using Netflix.Helpers.Dependency;
 using Netflix.Models;
 using Prism.Commands;
 using Prism.Navigation;
-using Prism.Services.Dialogs;
 using Xamarin.Forms;
 
 namespace Netflix.ViewModels
@@ -12,19 +11,19 @@ namespace Netflix.ViewModels
     public class HomePageViewModel : ViewModelBase
     {
         private INavigationService navigationService;
-        private IDialogService dialogService;
         private IToast toast;
+        private IChangeWindow changeWindow;
         public DelegateCommand ShowInfo { get; }
         public DelegateCommand GotoSearchPageCommand { get; }
         public DelegateCommand GotoMyListPage { get; }
         public DelegateCommand AddtoListCommand { get; }
         public DelegateCommand GotoProfilePage { get; }
 
-        public HomePageViewModel(INavigationService navigationService, IDialogService dialogService, IToast toast) : base(navigationService)
+        public HomePageViewModel(INavigationService navigationService, IToast toast, IChangeWindow changeWindow) : base(navigationService)
         {
             this.navigationService = navigationService;
-            this.dialogService = dialogService;
             this.toast = toast;
+            this.changeWindow = changeWindow;
             ShowInfo = new DelegateCommand(async () => await ShowPopup());
             GotoSearchPageCommand = new DelegateCommand(async  () => await this.navigationService.NavigateAsync("SearchPage"));
             GotoMyListPage = new DelegateCommand(async () => await this.navigationService.NavigateAsync("MyListPage"));
@@ -34,23 +33,19 @@ namespace Netflix.ViewModels
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            var featuredShow = await API.GetFeaturedShow();
-
-            Thumbnail = featuredShow.Thumbnail;
-            Genres = string.Join(" • ", featuredShow.Genre);
-            Synopsis = featuredShow.Synopsis;
-            Year = featuredShow.Year;
-            TitleOfShow = featuredShow.Title;
-            Casts = featuredShow.Casts;
-            infoThumbnail = featuredShow.InfoThumbnail;
-
-            var popular =  API.GetPopularShows();
-            var action =  API.GetActionShows();
-            var comedy =  API.GetComedyShows();
-            var comingSoon =  API.GetComingSoonShows();
-            var allShows =  API.GetAllShows();
+            var popular = MovieQuery("popularShows", "thumbnail", "title");
+            var action = MovieQuery("actionShows", "thumbnail", "title");
+            var comedy = MovieQuery("comedyShows", "thumbnail", "title");
+            var comingSoon = MovieQuery("comingSoonShows", "thumbnail", "title");
+            var allShows = MovieQuery("allShows", "thumbnail", "title");
 
             await Task.WhenAll(popular, action, comedy, comingSoon, allShows);
+
+            var graphQLQuery = await FeaturedMovieQuery("thumbnail", "genre", "title");
+
+            Thumbnail = graphQLQuery.FeaturedMovieModel.Thumbnail;
+            Genres = string.Join(" • ", graphQLQuery.FeaturedMovieModel.Genre);
+            TitleOfShow = graphQLQuery.FeaturedMovieModel.Title;
 
             Popular = await popular;
             Action = await action;
@@ -81,34 +76,11 @@ namespace Netflix.ViewModels
         }
 
         #region Properties
-        private string infoThumbnail;
-
-        private string casts;
-        public string Casts
-        {
-            get { return casts; }
-            set { SetProperty(ref casts, value); }
-        }
-
         private string title;
         public string TitleOfShow
         {
             get { return title; }
             set { SetProperty(ref title, value); }
-        }
-
-        private string year;
-        public string Year
-        {
-            get { return year; }
-            set { SetProperty(ref year, value); }
-        }
-
-        private string synopsis;
-        public string Synopsis
-        {
-            get { return synopsis; }
-            set { SetProperty(ref synopsis, value); }
         }
 
         private ObservableCollection<MovieModel> allShows;
@@ -172,10 +144,6 @@ namespace Netflix.ViewModels
                     new MovieModel
                     {
                         Title = TitleOfShow,
-                        Year = Year,
-                        Synopsis = Synopsis,
-                        Casts = Casts,
-                        InfoThumbnail = infoThumbnail,
                         Thumbnail = Thumbnail
                     }
                 }
@@ -192,10 +160,6 @@ namespace Netflix.ViewModels
                     new MovieModel
                     {
                         Title = movieModel.Title,
-                        Year = movieModel.Year,
-                        Synopsis = movieModel.Synopsis,
-                        Casts = movieModel.Casts,
-                        InfoThumbnail = movieModel.InfoThumbnail,
                         Thumbnail = movieModel.Thumbnail
                     }
                 }
@@ -207,13 +171,14 @@ namespace Netflix.ViewModels
         {
             await App.CreateDatabaseTable<MovieModel>().ConfigureAwait(false);
 
+            var myListPageQuery = await SearchForShow(TitleOfShow, "year", "synopsis", "casts");
+
             var listItem = new MovieModel
             {
                 Title = TitleOfShow,
-                Year = Year,
-                Synopsis = Synopsis,
-                Casts = Casts,
-                InfoThumbnail = infoThumbnail,
+                Year = myListPageQuery.SearchForShowModel.Year,
+                Synopsis = myListPageQuery.SearchForShowModel.Synopsis,
+                Casts = myListPageQuery.SearchForShowModel.Casts,
                 Thumbnail = Thumbnail
             };
             Device.BeginInvokeOnMainThread(() =>
@@ -222,6 +187,7 @@ namespace Netflix.ViewModels
             });
             await App.ConnectionString.InsertAsync(listItem).ConfigureAwait(false);
         }
+
         #endregion
     }
 }

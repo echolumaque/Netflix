@@ -36,7 +36,7 @@ namespace Netflix
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDE3MDA4QDMxMzgyZTM0MmUzMFFWMG5rL1FyNFZLNnhRdEFESVdpYmJ6QjB3Y3IzRytpc3lqQXVQeGV5NDQ9");
             InitializeComponent();
             Preferences.Set("search", string.Empty);
-            await NavigationService.NavigateAsync("LoginPage"/*"/CustomNavigation/MainTabPage?createTab=HomePage&createTab=ComingSoonPage&createTab=DownloadPage"*/);
+            await NavigationService.NavigateAsync(/*"LoginPage"*/"/CustomNavigation/MainTabPage?createTab=HomePage&createTab=ComingSoonPage&createTab=DownloadPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

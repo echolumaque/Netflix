@@ -18,14 +18,15 @@ namespace Netflix.ViewModels
             EpisodePageCommand = new DelegateCommand(async () => await GotoEpisodePage());
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            InfoThumbnail = parameters.GetValue<MovieModel>("show").InfoThumbnail;
-            Year = parameters.GetValue<MovieModel>("show").Year;
-            Synopsis = parameters.GetValue<MovieModel>("show").Synopsis;
-            Casts = parameters.GetValue<MovieModel>("show").Casts;
-            Thumbnail = parameters.GetValue<MovieModel>("show").Thumbnail;
-            Title = parameters.GetValue<MovieModel>("show").Title;
+            var passedParameter = parameters.GetValue<MovieModel>("show");
+            var featuredMoviePopup = await SearchForShow(passedParameter.Title, "year", "synopsis", "casts");
+
+            Year = featuredMoviePopup.SearchForShowModel.Year;
+            Synopsis = featuredMoviePopup.SearchForShowModel.Synopsis;
+            Thumbnail = passedParameter.Thumbnail;
+            Title = passedParameter.Title;
         }
 
         #region Properties
@@ -44,13 +45,6 @@ namespace Netflix.ViewModels
             set { SetProperty(ref thumbnail, value); }
         }
 
-        private string infoThumnail;
-        public string InfoThumbnail
-        {
-            get { return infoThumnail; }
-            set { SetProperty(ref infoThumnail, value); }
-        }
-
         private string year;
         public string Year
         {
@@ -64,14 +58,6 @@ namespace Netflix.ViewModels
             get { return synopsis; }
             set { SetProperty(ref synopsis, value); }
         }
-
-        private string casts;
-        public string Casts
-        {
-            get { return casts; }
-            set { SetProperty(ref casts, value); }
-        }
-
         #endregion
 
         #region Methods
@@ -87,8 +73,6 @@ namespace Netflix.ViewModels
                         Title = Title,
                         Year = Year,
                         Synopsis = Synopsis,
-                        Casts = Casts,
-                        InfoThumbnail = InfoThumbnail,
                         Thumbnail = Thumbnail
                     }
                 }

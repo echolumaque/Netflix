@@ -74,8 +74,20 @@
     <PackageReference Include="glidex.forms">
       <Version>2.1.0.470</Version>
     </PackageReference>
+    <PackageReference Include="GraphQL">
+      <Version>4.2.0</Version>
+    </PackageReference>
+    <PackageReference Include="GraphQL.Client">
+      <Version>3.2.3</Version>
+    </PackageReference>
+    <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft">
+      <Version>3.2.3</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.CurrentActivity">
+      <Version>2.1.0.4</Version>
     </PackageReference>
     <PackageReference Include="Prism.Plugin.Popups">
       <Version>8.0.31-beta</Version>
@@ -103,6 +115,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\Dependency\ChangeWindow.cs" />
     <Compile Include="Helpers\Dependency\ToastDroid.cs" />
     <Compile Include="Helpers\Renderers\CustomEntry.cs" />
     <Compile Include="Helpers\Renderers\CustomNavigationPageRenderer.cs" />

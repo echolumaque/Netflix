@@ -26,14 +26,18 @@ namespace Netflix.ViewModels
             ProfilePageCommand = new DelegateCommand(async () => await this.navigationService.NavigateAsync("ProfilePage"));
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            TitleOfShow = parameters.GetValue<MovieModel>("show").Title;
-            Year = parameters.GetValue<MovieModel>("show").Year;
-            Synopsis = parameters.GetValue<MovieModel>("show").Synopsis;
-            Casts = parameters.GetValue<MovieModel>("show").Casts;
-            InfoThumbnail = parameters.GetValue<MovieModel>("show").InfoThumbnail;
-            Thumbnail = parameters.GetValue<MovieModel>("show").Thumbnail;
+            var passedParameter = parameters.GetValue<MovieModel>("show");
+            var episodePageQuery = await SearchForShow(passedParameter.Title, "casts", "infoThumbnail");
+
+            TitleOfShow = passedParameter.Title;
+            Year = passedParameter.Year;
+            Synopsis = passedParameter.Synopsis;
+            Thumbnail = passedParameter.Thumbnail;
+            Casts = episodePageQuery.SearchForShowModel.Casts;
+            InfoThumbnail = episodePageQuery.SearchForShowModel.InfoThumbnail;
+
             var episodes = new ObservableCollection<MovieModel>();
             for (int i = 1; i < 11; i++)
             {
@@ -98,13 +102,14 @@ namespace Netflix.ViewModels
         {
             await App.CreateDatabaseTable<MovieModel>().ConfigureAwait(false);
 
+            var myListPageQuery = await SearchForShow(TitleOfShow, "year", "synopsis", "casts");
+
             var listItem = new MovieModel
             {
                 Title = TitleOfShow,
-                Year = Year,
-                Synopsis = Synopsis,
-                Casts = Casts,
-                InfoThumbnail = InfoThumbnail,
+                Year = myListPageQuery.SearchForShowModel.Year,
+                Synopsis = myListPageQuery.SearchForShowModel.Synopsis,
+                Casts = myListPageQuery.SearchForShowModel.Casts,
                 Thumbnail = Thumbnail
             };
             Device.BeginInvokeOnMainThread(() =>

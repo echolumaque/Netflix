@@ -17,8 +17,7 @@ namespace Netflix.ViewModels
             ProfilePageCommand = new DelegateCommand(async () => await this.navigationService.NavigateAsync("ProfilePage"));
         }
 
-        public override async void Initialize(INavigationParameters parameters) => ComingSoon = await API.GetComingSoonShows();
-
+        public override async void Initialize(INavigationParameters parameters) => ComingSoon = await MovieQuery("comingSoonShows", "infoThumbnail", "genre", "title", "synopsis");
         #region Properties
 
         private ObservableCollection<MovieModel> comingSoon;
