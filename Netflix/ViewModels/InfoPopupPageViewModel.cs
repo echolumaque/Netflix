@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Netflix.Helpers.API.Interfaces;
 using Netflix.Models;
 using Prism.Commands;
 using Prism.Navigation;
@@ -8,12 +9,14 @@ namespace Netflix.ViewModels
     public class InfoPopupPageViewModel : ViewModelBase
     {
         private INavigationService navigationService;
+        private IGraphQL graphQL;
         public DelegateCommand CloseCommand { get; }
         public DelegateCommand EpisodePageCommand { get; }
 
-        public InfoPopupPageViewModel(INavigationService navigationService) : base(navigationService)
+        public InfoPopupPageViewModel(INavigationService navigationService, IGraphQL graphQL) : base(navigationService)
         {
             this.navigationService = navigationService;
+            this.graphQL = graphQL;
             CloseCommand = new DelegateCommand(async () => await this.navigationService.ClearPopupStackAsync());
             EpisodePageCommand = new DelegateCommand(async () => await GotoEpisodePage());
         }
@@ -21,7 +24,7 @@ namespace Netflix.ViewModels
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             var passedParameter = parameters.GetValue<MovieModel>("show");
-            var featuredMoviePopup = await SearchForShow(passedParameter.Title, "year", "synopsis", "casts");
+            var featuredMoviePopup = await graphQL.SearchForShow(passedParameter.Title, "year", "synopsis", "casts");
 
             Year = featuredMoviePopup.SearchForShowModel.Year;
             Synopsis = featuredMoviePopup.SearchForShowModel.Synopsis;

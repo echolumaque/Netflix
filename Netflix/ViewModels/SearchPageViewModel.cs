@@ -1,9 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Netflix.Helpers.Dependency;
+using Netflix.Helpers.API.Interfaces;
 using Netflix.Models;
 using Prism.Commands;
-using Prism.Common;
 using Prism.Navigation;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -13,13 +12,13 @@ namespace Netflix.ViewModels
     public class SearchPageViewModel : ViewModelBase
     {
         private INavigationService navigationService;
-        private IChangeWindow changeWindow;
+        private IGraphQL graphQL;
         public DelegateCommand ProfilePageCommand { get; }
         public DelegateCommand<string> SendRequest { get; }
-        public SearchPageViewModel(INavigationService navigationService, IChangeWindow changeWindow) : base(navigationService)
+        public SearchPageViewModel(INavigationService navigationService, IGraphQL graphQL) : base(navigationService)
         {
             this.navigationService = navigationService;
-            this.changeWindow = changeWindow;
+            this.graphQL = graphQL;
             SendRequest = new DelegateCommand<string>(async (show) => await SearchForShows(show));
             ProfilePageCommand = new DelegateCommand(async () => await this.navigationService.NavigateAsync("ProfilePage"));
         }
@@ -27,14 +26,9 @@ namespace Netflix.ViewModels
         {
             if (string.IsNullOrWhiteSpace(Preferences.Get("search", string.Empty)))
             {
-                AllShows = await MovieQuery("allShows", "thumbnail", "title");
+                AllShows = await graphQL.MovieQuery("allShows", "thumbnail", "title");
                 ColViewLayout = new LinearItemsLayout(ItemsLayoutOrientation.Vertical);
             }
-            //else
-            //{
-            //    AllShows = await SearchForShowsList(Preferences.Get("search", string.Empty));
-            //    ColViewLayout = new GridItemsLayout(3, ItemsLayoutOrientation.Vertical);
-            //}
 
             for (int i = 0; i < AllShows.Count; i++)
             {
@@ -83,7 +77,7 @@ namespace Netflix.ViewModels
             if (string.IsNullOrWhiteSpace(title))
             {
                 Preferences.Set("search", title);
-                AllShows = await MovieQuery("allShows", "thumbnail", "title");
+                AllShows = await graphQL.MovieQuery("allShows", "thumbnail", "title");
                 ColViewLayout = new LinearItemsLayout(ItemsLayoutOrientation.Vertical);
                 for (int i = 0; i < AllShows.Count; i++)
                 {
@@ -94,7 +88,7 @@ namespace Netflix.ViewModels
             else
             {
                 Preferences.Set("search", title);
-                AllShows = await SearchForShowsList(title, "thumbnail", "title");
+                AllShows = await graphQL.SearchForShowsList(title, "thumbnail", "title");
                 ColViewLayout = new GridItemsLayout(3, ItemsLayoutOrientation.Vertical);
                 for (int i = 0; i < AllShows.Count; i++)
                 {

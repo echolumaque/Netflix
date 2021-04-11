@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Netflix.Helpers.API.Interfaces;
 using Netflix.Helpers.Dependency;
 using Netflix.Models;
 using Prism.Commands;
@@ -12,18 +13,18 @@ namespace Netflix.ViewModels
     {
         private INavigationService navigationService;
         private IToast toast;
-        private IChangeWindow changeWindow;
+        private IGraphQL graphQL;
         public DelegateCommand ShowInfo { get; }
         public DelegateCommand GotoSearchPageCommand { get; }
         public DelegateCommand GotoMyListPage { get; }
         public DelegateCommand AddtoListCommand { get; }
         public DelegateCommand GotoProfilePage { get; }
 
-        public HomePageViewModel(INavigationService navigationService, IToast toast, IChangeWindow changeWindow) : base(navigationService)
+        public HomePageViewModel(INavigationService navigationService, IToast toast, IGraphQL graphQL) : base(navigationService)
         {
             this.navigationService = navigationService;
             this.toast = toast;
-            this.changeWindow = changeWindow;
+            this.graphQL = graphQL;
             ShowInfo = new DelegateCommand(async () => await ShowPopup());
             GotoSearchPageCommand = new DelegateCommand(async  () => await this.navigationService.NavigateAsync("SearchPage"));
             GotoMyListPage = new DelegateCommand(async () => await this.navigationService.NavigateAsync("MyListPage"));
@@ -33,15 +34,15 @@ namespace Netflix.ViewModels
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            var popular = MovieQuery("popularShows", "thumbnail", "title");
-            var action = MovieQuery("actionShows", "thumbnail", "title");
-            var comedy = MovieQuery("comedyShows", "thumbnail", "title");
-            var comingSoon = MovieQuery("comingSoonShows", "thumbnail", "title");
-            var allShows = MovieQuery("allShows", "thumbnail", "title");
+            var popular = graphQL.MovieQuery("popularShows", "thumbnail", "title");
+            var action = graphQL.MovieQuery("actionShows", "thumbnail", "title");
+            var comedy = graphQL.MovieQuery("comedyShows", "thumbnail", "title");
+            var comingSoon = graphQL.MovieQuery("comingSoonShows", "thumbnail", "title");
+            var allShows = graphQL.MovieQuery("allShows", "thumbnail", "title");
 
             await Task.WhenAll(popular, action, comedy, comingSoon, allShows);
 
-            var graphQLQuery = await FeaturedMovieQuery("thumbnail", "genre", "title");
+            var graphQLQuery = await graphQL.FeaturedMovieQuery("thumbnail", "genre", "title");
 
             Thumbnail = graphQLQuery.FeaturedMovieModel.Thumbnail;
             Genres = string.Join(" • ", graphQLQuery.FeaturedMovieModel.Genre);
@@ -171,7 +172,7 @@ namespace Netflix.ViewModels
         {
             await App.CreateDatabaseTable<MovieModel>().ConfigureAwait(false);
 
-            var myListPageQuery = await SearchForShow(TitleOfShow, "year", "synopsis", "casts");
+            var myListPageQuery = await graphQL.SearchForShow(TitleOfShow, "year", "synopsis", "casts");
 
             var listItem = new MovieModel
             {
