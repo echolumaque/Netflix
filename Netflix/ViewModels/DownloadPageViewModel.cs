@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Commands;
 using Prism.Navigation;
 using Prism.Navigation.TabbedPages;
 

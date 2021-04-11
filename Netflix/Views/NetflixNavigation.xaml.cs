@@ -36,6 +36,13 @@ namespace Netflix.Views
             null
             );
 
+        public static readonly BindableProperty IsProfilePicVisibleProperty = BindableProperty.Create(
+           nameof(IsProfilePicVisible),
+           typeof(bool),
+           typeof(NetflixNavigation),
+           true
+           );
+
         public static readonly BindableProperty ProfilePicCommandProperty = BindableProperty.Create(
             nameof(ProfilePicCommand),
             typeof(ICommand),
@@ -62,6 +69,20 @@ namespace Netflix.Views
            typeof(LayoutOptions),
            typeof(NetflixNavigation),
            LayoutOptions.End
+           );
+
+        public static readonly BindableProperty NavigationStackProperty = BindableProperty.Create(
+           nameof(NavigationStack),
+           typeof(ICommand),
+           typeof(NetflixNavigation),
+           null
+           );
+
+        public static readonly BindableProperty IsBackArrowVisibleProperty = BindableProperty.Create(
+           nameof(BackArrowProperty),
+           typeof(bool),
+           typeof(NetflixNavigation),
+           true
            );
         #endregion
 
@@ -109,6 +130,24 @@ namespace Netflix.Views
         {
             get { return (LayoutOptions)GetValue(DPHorizontalProperty); }
             set { SetValue(DPHorizontalProperty, value); }
+        }
+
+        public ICommand NavigationStack
+        {
+            get { return (ICommand)GetValue(NavigationStackProperty); }
+            set { SetValue(NavigationStackProperty, value); }
+        }
+
+        public bool BackArrowProperty
+        {
+            get { return (bool)GetValue(IsBackArrowVisibleProperty); }
+            set { SetValue(IsBackArrowVisibleProperty, value); }
+        }
+
+        public bool IsProfilePicVisible
+        {
+            get { return (bool)GetValue(IsProfilePicVisibleProperty); }
+            set { SetValue(IsProfilePicVisibleProperty, value); }
         }
         #endregion
     }

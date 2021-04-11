@@ -4,7 +4,7 @@
                 x:Class="Netflix.Helpers.Renderers.CustomNavigation"
                 xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
                 iOS:NavigationPage.IsNavigationBarTranslucent="True"               
-                BarTextColor="White">
+                BarTextColor="Transparent">
     <NavigationPage.BarBackgroundColor>
         <OnPlatform x:TypeArguments="Color">
             <On Platform="Android, iOS" Value="transparent" />

@@ -4,30 +4,40 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              BackgroundColor="Black"
-             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+             xmlns:views="clr-namespace:Netflix.Views"
+             xmlns:images="clr-namespace:Netflix.Helpers.Images"
              Title="My List"
              Padding="0,50,0,0"
              x:Class="Netflix.Views.MyListPage">
+    
+    <StackLayout>
+        <views:NetflixNavigation ProfilePic="{images:ImageResource Netflix.Helpers.Images.smile.png}"
+                                 ProfilePicCommand="{Binding ProfilePageCommand}"
+                                 PageTitle="My List"
+                                 SearchHorizontal="EndAndExpand"
+                                 DPHorizontal="End"/>
 
-    <CollectionView ItemSizingStrategy="MeasureAllItems"
-                    ItemsSource="{Binding ShowsList}"
-                    ItemsLayout="VerticalGrid, 3">
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <StackLayout>
-                    <ffimage:CachedImage Source="{Binding Thumbnail}"
-                                         BitmapOptimizations="True"
-                                         DownsampleToViewSize="True"
-                                         Margin="3"
-                                         HeightRequest="180"
-                                         WidthRequest="150">
-                        <ffimage:CachedImage.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShowInfoCommand}"
-                                                  CommandParameter="{Binding .}"/>
-                        </ffimage:CachedImage.GestureRecognizers>
-                    </ffimage:CachedImage>
-                </StackLayout>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+        <CollectionView ItemSizingStrategy="MeasureAllItems"
+                        ItemsSource="{Binding ShowsList}"
+                        ItemsLayout="VerticalGrid, 3">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <ffimage:CachedImage Source="{Binding Thumbnail}"
+                                             BitmapOptimizations="True"
+                                             DownsampleToViewSize="True"
+                                             Margin="3"
+                                             HeightRequest="180"
+                                             WidthRequest="150">
+                            <ffimage:CachedImage.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShowInfoCommand}"
+                                                      CommandParameter="{Binding .}"/>
+                            </ffimage:CachedImage.GestureRecognizers>
+                        </ffimage:CachedImage>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
 </ContentPage>

@@ -7,14 +7,12 @@ namespace Netflix.ViewModels
 {
     public class ComingSoonPageViewModel : ViewModelBase
     {
-        private INavigationService navigationService;
         public DelegateCommand SearchCommand { get; }
         public DelegateCommand ProfilePageCommand { get; }
         public ComingSoonPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            this.navigationService = navigationService;
-            SearchCommand = new DelegateCommand(async () => await this.navigationService.NavigateAsync("SearchPage"));
-            ProfilePageCommand = new DelegateCommand(async () => await this.navigationService.NavigateAsync("ProfilePage"));
+            SearchCommand = new DelegateCommand(async () => await navigationService.NavigateAsync("SearchPage"));
+            ProfilePageCommand = new DelegateCommand(async () => await navigationService.NavigateAsync("ProfilePage"));
         }
 
         public override async void Initialize(INavigationParameters parameters) => ComingSoon = await MovieQuery("comingSoonShows", "infoThumbnail", "genre", "title", "synopsis");

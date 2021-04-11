@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Netflix.Models;
 using Prism.Commands;
 using Prism.Navigation;
-using Prism.Services.Dialogs;
 
 namespace Netflix.ViewModels
 {
@@ -11,10 +10,12 @@ namespace Netflix.ViewModels
     {
         private INavigationService navigationService;
         public DelegateCommand<MovieModel> ShowPopupCommand { get; }
+        public DelegateCommand ProfilePageCommand { get; set; }
         public MyListPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             this.navigationService = navigationService;
             ShowPopupCommand = new DelegateCommand<MovieModel>(async (show) => await ShowPopup(show));
+            ProfilePageCommand = new DelegateCommand(async () => await navigationService.NavigateAsync("ProfilePage"));
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)

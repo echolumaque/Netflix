@@ -6,32 +6,5 @@
             android:TabbedPage.BarItemColor="Gray"
             android:TabbedPage.BarSelectedItemColor="White"
             BarBackgroundColor="Black"
-            xmlns:fonts="clr-namespace:Netflix.Helpers.Fonts"
-            xmlns:pages="clr-namespace:Netflix.Views"
             x:Class="Netflix.Views.MainTabPage">
-
-    <!--<pages:HomePage Title="Home">
-        <pages:HomePage.IconImageSource>
-            <FontImageSource FontFamily="matf"
-                             Glyph="{x:Static fonts:MaterialFilled.Home}"
-                             Color="White"/>
-        </pages:HomePage.IconImageSource>
-    </pages:HomePage>
-
-   
-    <pages:ComingSoonPage Title="Coming Soon">
-        <pages:ComingSoonPage.IconImageSource>
-            <FontImageSource FontFamily="matf"
-                             Glyph="{x:Static fonts:MaterialFilled.Video_library}"
-                             Color="White"/>
-        </pages:ComingSoonPage.IconImageSource>
-    </pages:ComingSoonPage>
-
-    <pages:DownloadPage Title="Downloads">
-        <ContentPage.IconImageSource>
-            <FontImageSource FontFamily="matf"
-                             Glyph="{x:Static fonts:MaterialFilled.File_download}"
-                             Color="White"/>
-        </ContentPage.IconImageSource>
-    </pages:DownloadPage>-->
 </TabbedPage>

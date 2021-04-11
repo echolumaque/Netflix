@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Commands;
 using Prism.Navigation;
 
 namespace Netflix.ViewModels
 {
     public class ProfilePageViewModel : ViewModelBase
     {
-        private INavigationService navigationService;
+        public DelegateCommand PopStack { get; }
         public ProfilePageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            this.navigationService = navigationService;
+            PopStack = new DelegateCommand(async () => await navigationService.GoBackAsync());
         }
     }
 }

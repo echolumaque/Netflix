@@ -9,13 +9,20 @@
              Visual="Material"
              BackgroundColor="Black"
              Title="Profiles &amp; More"
-             Padding="0,60,0,0"
+             Padding="0,40,0,0"
              xmlns:renderer="clr-namespace:Netflix.Helpers.Renderers"
              xmlns:transformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:views="clr-namespace:Netflix.Views"
              x:Class="Netflix.Views.ProfilePage">
     <ScrollView>
         <StackLayout HorizontalOptions="FillAndExpand"
                      VerticalOptions="FillAndExpand">
+
+            <views:NetflixNavigation PageTitle="Profiles &amp; More"
+                                     NavigationStack="{Binding PopStack}"
+                                     IsSearchVisible="False"
+                                     IsProfilePicVisible="False"/>
+
 
             <Grid RowDefinitions="70,Auto"
                   ColumnSpacing="20"
