@@ -266,7 +266,7 @@
                 <Label Text="Action"
                        TextColor="White"
                        FontFamily="Bold"
-                       Margin="0,0,0,15"
+                       Margin="0,15"
                        Grid.Row="4"
                        FontSize="30"/>
 
@@ -296,7 +296,7 @@
                 <Label Text="Comedy"
                        TextColor="White"
                        FontFamily="Bold"
-                       Margin="0,0,0,15"
+                       Margin="0,15"
                        Grid.Row="6"
                        FontSize="30"/>
 
@@ -325,7 +325,7 @@
 
                 <Label Text="Coming Soon on Netflix"
                        TextColor="White"
-                       Margin="0,0,0,15"
+                       Margin="0,15"
                        FontFamily="Bold"
                        Grid.Row="8"
                        FontSize="30"/>

@@ -9,6 +9,7 @@
              Title="Coming Soon"
              xmlns:views="clr-namespace:Netflix.Views"
              xmlns:images="clr-namespace:Netflix.Helpers.Images"
+             Padding="0,30,0,0"
              x:Class="Netflix.Views.ComingSoonPage">
 
     <ContentPage.IconImageSource>
@@ -22,7 +23,7 @@
                                  ProfilePic="{images:ImageResource Netflix.Helpers.Images.smile.png}"
                                  SearchCommand="{Binding SearchCommand}"
                                  ProfilePicCommand="{Binding ProfilePageCommand}"
-                                 Margin="0,20,0,0"/>
+                                 BackArrowProperty="False"/>
 
         <StackLayout Orientation="Horizontal"
                      Margin="0,10">

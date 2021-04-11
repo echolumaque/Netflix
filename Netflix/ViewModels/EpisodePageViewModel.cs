@@ -4,11 +4,12 @@ using Netflix.Helpers.Dependency;
 using Netflix.Models;
 using Prism.Commands;
 using Prism.Navigation;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Netflix.ViewModels
 {
-    public class EpisodePageViewModel : ViewModelBase, IInitialize
+    public class EpisodePageViewModel : ViewModelBase
     {
         public INavigationService navigationService;
         private IToast toast;
@@ -26,9 +27,10 @@ namespace Netflix.ViewModels
             ProfilePageCommand = new DelegateCommand(async () => await this.navigationService.NavigateAsync("ProfilePage"));
         }
 
-        public override async void OnNavigatedTo(INavigationParameters parameters)
+        public override async void Initialize(INavigationParameters parameters)
         {
             var passedParameter = parameters.GetValue<MovieModel>("show");
+
             var episodePageQuery = await SearchForShow(passedParameter.Title, "casts", "infoThumbnail");
 
             TitleOfShow = passedParameter.Title;
@@ -50,6 +52,8 @@ namespace Netflix.ViewModels
             }
             Episodes = new ObservableCollection<MovieModel>(episodes);
         }
+
+
         #region Properties
         private string Thumbnail;
 

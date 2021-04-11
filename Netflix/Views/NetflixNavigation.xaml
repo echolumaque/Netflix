@@ -9,11 +9,24 @@
   <ContentView.Content>
       <StackLayout Orientation="Horizontal"
                    HorizontalOptions="FillAndExpand">
+
+            <Label Text="{x:Static fonts:Material.Arrow_back}"
+                   FontFamily="mat"
+                   TextColor="White"
+                   HorizontalOptions="Start"
+                   VerticalTextAlignment="Center"
+                   Margin="15,0"
+                   IsVisible="{Binding BackArrowProperty}"
+                   FontSize="25">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NavigationStack}"/>
+                </Label.GestureRecognizers>
+            </Label>
+
             <Label Text="{Binding PageTitle}"
                    FontFamily="Bold"
                    VerticalTextAlignment="Center"
                    FontSize="25"
-                   HorizontalOptions="Start"
                    TextColor="White"/>
 
             <Label Text="{x:Static fonts:Material.Search}"
@@ -31,6 +44,7 @@
 
             <ffimage:CachedImage Source="{Binding ProfilePic}"
                                  HeightRequest="30"
+                                 IsVisible="{Binding IsProfilePicVisible}"
                                  BitmapOptimizations="True"
                                  DownsampleToViewSize="True"
                                  HorizontalOptions="{Binding DPHorizontal}"

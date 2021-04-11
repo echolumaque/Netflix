@@ -9,18 +9,16 @@
              xmlns:fonts="clr-namespace:Netflix.Helpers.Fonts"
              xmlns:views="clr-namespace:Netflix.Views"
              xmlns:images="clr-namespace:Netflix.Helpers.Images"
+             Padding="0,30,0,0"
              x:Class="Netflix.Views.EpisodePage">
 
-    <NavigationPage.TitleView>
-        <views:NetflixNavigation ProfilePic="{images:ImageResource Netflix.Helpers.Images.smile.png}"
-                                 SearchHorizontal="EndAndExpand"
-                                 DPHorizontal="End"
-                                 SearchCommand="{Binding SearchPageCommand}"
-                                 ProfilePicCommand="{Binding ProfilePageCommand}"/>
-    </NavigationPage.TitleView>
-
-   <ScrollView Margin="0,60,0,0">
+    <ScrollView>
         <StackLayout Spacing="10">
+            <views:NetflixNavigation ProfilePic="{images:ImageResource Netflix.Helpers.Images.smile.png}"
+                                     SearchHorizontal="EndAndExpand"
+                                     DPHorizontal="End"
+                                     SearchCommand="{Binding SearchPageCommand}"
+                                     ProfilePicCommand="{Binding ProfilePageCommand}"/>
             <Grid>
                 <ffcached:CachedImage Source="{Binding InfoThumbnail}"
                                       BitmapOptimizations="True"

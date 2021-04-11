@@ -5,7 +5,6 @@ using Android.Graphics;
 using Android.OS;
 using Android.Util;
 using Android.Views;
-using AndroidX.Core.View;
 using Netflix.Droid.Helpers.Dependency;
 using Netflix.Helpers.Dependency;
 using Plugin.CurrentActivity;
@@ -36,16 +35,15 @@ namespace Netflix.Droid
                 Window.SetStatusBarColor(Color.Transparent);
                 Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
                 Window.AddFlags(WindowManagerFlags.LayoutInOverscan);
-                Window.AddFlags(WindowManagerFlags.Fullscreen);
+                Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
             }
             else if (Build.VERSION.SdkInt == BuildVersionCodes.R || Build.VERSION.SdkInt != BuildVersionCodes.R) //sakop yung navbar pero walang batt, wifi icons
             {
                 Window.SetStatusBarColor(Color.Transparent);
                 Window.Attributes.LayoutInDisplayCutoutMode = LayoutInDisplayCutoutMode.ShortEdges;
-                //Window.SetFlags(WindowManagerFlags.LayoutNoLimits, WindowManagerFlags.LayoutNoLimits);
                 Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
                 Window.AddFlags(WindowManagerFlags.LayoutInOverscan);
-                Window.AddFlags(WindowManagerFlags.Fullscreen);
+                Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
                 Window.SetDecorFitsSystemWindows(false);
             }
             else
