@@ -1,10 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Netflix.Helpers.API.Interfaces;
 using Netflix.Helpers.Dependency;
 using Netflix.Models;
 using Prism.Commands;
 using Prism.Navigation;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Netflix.ViewModels
@@ -13,15 +13,17 @@ namespace Netflix.ViewModels
     {
         public INavigationService navigationService;
         private IToast toast;
+        private IGraphQL graphQL;
         public DelegateCommand AddToListCommand { get; }
         public DelegateCommand SearchPageCommand { get; }
         public DelegateCommand ProfilePageCommand { get; }
 
 
-        public EpisodePageViewModel(INavigationService navigationService, IToast toast) : base(navigationService)
+        public EpisodePageViewModel(INavigationService navigationService, IToast toast, IGraphQL graphQL) : base(navigationService)
         {
             this.navigationService = navigationService;
             this.toast = toast;
+            this.graphQL = graphQL;
             AddToListCommand = new DelegateCommand(async () => await AddtoList());
             SearchPageCommand = new DelegateCommand(async () => await this.navigationService.NavigateAsync("SearchPage"));
             ProfilePageCommand = new DelegateCommand(async () => await this.navigationService.NavigateAsync("ProfilePage"));
@@ -31,7 +33,7 @@ namespace Netflix.ViewModels
         {
             var passedParameter = parameters.GetValue<MovieModel>("show");
 
-            var episodePageQuery = await SearchForShow(passedParameter.Title, "casts", "infoThumbnail");
+            var episodePageQuery = await graphQL.SearchForShow(passedParameter.Title, "casts", "infoThumbnail");
 
             TitleOfShow = passedParameter.Title;
             Year = passedParameter.Year;
@@ -106,7 +108,7 @@ namespace Netflix.ViewModels
         {
             await App.CreateDatabaseTable<MovieModel>().ConfigureAwait(false);
 
-            var myListPageQuery = await SearchForShow(TitleOfShow, "year", "synopsis", "casts");
+            var myListPageQuery = await graphQL.SearchForShow(TitleOfShow, "year", "synopsis", "casts");
 
             var listItem = new MovieModel
             {

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Netflix.Helpers.API.Interfaces;
 using Netflix.Helpers.Database;
 using Netflix.Helpers.Renderers;
 using Netflix.ViewModels;
@@ -56,6 +57,8 @@ namespace Netflix
             containerRegistry.RegisterForNavigation<MyListPage, MyListPageViewModel>();
             containerRegistry.RegisterForNavigation<DownloadPage, DownloadPageViewModel>();
             containerRegistry.RegisterForNavigation<ProfilePage, ProfilePageViewModel>();
+
+            containerRegistry.RegisterSingleton<IGraphQL, Helpers.API.Implementations.GraphQL>();
         }
 
         public static HttpClient LocalAPI = new(new HttpClientHandler {AutomaticDecompression = DecompressionMethods.Deflate} )
