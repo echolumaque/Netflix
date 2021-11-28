@@ -27,13 +27,12 @@ jobs:
     - uses: actions/checkout@v2.4.0
     - name: Android
       run: |
-        cd ..
         nuget restore
-        msbuild Netflix.Android/Netflix.Android.csproj /verbosity:normal /t:Rebuild /t:PackageForAndroid /t:SignAndroidPackage /p:Configuration=Release
+        msbuild Netflix.Android/Netflix.Android.csproj /verbosity:normal /t:Rebuild /t:PackageForAndroid /t:SignAndroidPackage /p:Configuration=Debug
     - uses: actions/upload-artifact@v2.2.4
       with:
         name: Netflix.Forms
-        path: Netflix/Netflix.Android/bin/Release/com.echolumaque.NetflixForms.apk
+        path: Netflix.Android/bin/Debug/com.echolumaque.NetflixForms.apk
         
 #   UploadArtifact:
 
