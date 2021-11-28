@@ -1,58 +1,34 @@
-name: CI on Push and Pull Request
+name: CI/CD Xamarin
 
-on: [push]
+on: push
 
 jobs:
-  #Practice:
-    #runs-on: macos-latest
-    #steps:
-    #- uses: actions/checkout@v1
-    #- name: Run a one-line script
-      #run: echo Hello, world!
-    #- name: Run a multi-line script
-      #run: |
-        #echo Add other actions to build,
-        #echo test, and deploy your project.
-    #- name: Show what's in the directory
-      #run: |
-        #ls
-    #- name: Show what all is in the parent directory
-      #run: |
-        #cd ..
-        #ls
-        
-  Android:
+  Build:
     runs-on: macos-latest
+    
     steps:
-    - uses: actions/checkout@v2.4.0
-    - name: Android
-      run: |
-        nuget restore
-        msbuild Netflix.Android/Netflix.Android.csproj /verbosity:normal /t:Rebuild /t:PackageForAndroid /t:SignAndroidPackage /p:Configuration=Debug
-    - uses: actions/upload-artifact@v2.2.4
-      with:
-        name: Netflix.Forms
-        path: Netflix.Android/bin/Debug/com.echolumaque.NetflixForms.apk
+      - name: Checkout Repository
+        uses: actions/checkout@v2.4.0
         
-#   UploadArtifact:
-
+      - name: Setup Android Signing
+        run: (echo ${{ secrets.KEYSTORE }} | base64 — decode) > ./Netflix.Android/Netflix.jks
         
-#   AppCenter:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: wzieba/AppCenter-Github-Action@v1.3.2
-#       - name: Publish artifact to App Center
-#         with: 
-#           appName: Netlflix.Forms
-#           token: a2f394562c314c4c5d08a7c7d5dc845fa0de64c8
-#           group: Collaboratos;Testers
-#           file: Netflix/Netflix.Android/bin/Release/com.echolumaque.Netflix.Forms.apk
-#           debug: false
-  #iOS:
-    #runs-on: macos-latest
-    #steps:
-    #- uses: actions/checkout@v1
-    #- name: iOS
-      #run: |
-        #nuget restore
-        #msbuild Netflix.iOS/Netflix.iOS.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Release
+      - name: Set Android Version
+        uses: damienaicheh/update-android-version-manifest-action@v1.0.0
+        with:
+          android-manifest-path: ./Netflix.Android/Properties/AndroidManifest.xml
+          version-name: 1.0
+          version-code: ${{ github.run_number }}
+          print-file: true
+        
+      - name: Restore NuGet packages
+        run: nuget restore
+        
+      - name: Build Android
+        run: MSBuild /t:SignAndroidPackage /p:Configuration=Release /p:AndroidPackageFormat=apk /p:AndroidKeyStore=true /p:AndroidSigningKeyAlias=Netflix /p:AndroidSigningKeyPass=${{ secrets.KEYSTORE_PASSWORD }} /p:AndroidSigningKeyStore=Netflix.jks /p:AndroidSigningStorePass=${{ secrets.KEYSTORE_PASSWORD }} ./Netflix.Android/Netflix.Android.csproj
+        
+      - name: Setuo App Center CLI
+        run: npm install -g appcenter-cli
+        
+      - name: Upload Android app to App Center
+        run: appcenter distribute release --silent --file ./Netflix.Android/bin/Release/com.echolumaque.NetflixForms.apk --app EchoLumaque/Netflix --group Collaborators --token ${{ secrets.APP_CENTER_TOKEN }}
