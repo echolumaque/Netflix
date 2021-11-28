@@ -27,6 +27,7 @@ jobs:
     - uses: actions/checkout@v2.4.0
     - name: Android
       run: |
+        cd ..
         nuget restore
         msbuild Netflix.Android/Netflix.Android.csproj /verbosity:normal /t:Rebuild /t:PackageForAndroid /t:SignAndroidPackage /p:Configuration=Release
     - uses: actions/upload-artifact@v2.2.4
