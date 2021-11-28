@@ -28,7 +28,7 @@ jobs:
     - name: Android
       run: |
         nuget restore
-        msbuild Netflix.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Debug
+        msbuild Netflix.Android/Netflix.Android.csproj /verbosity:normal /t:Rebuild /p:Configuration=Release
         
   iOS:
     runs-on: macos-latest
@@ -37,4 +37,4 @@ jobs:
     - name: iOS
       run: |
         nuget restore
-        msbuild Netflix.iOS/Netflix.iOS.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Debug
+        msbuild Netflix.iOS/Netflix.iOS.csproj /verbosity:normal /t:Rebuild /p:Platform=iPhoneSimulator /p:Configuration=Release
